@@ -1,0 +1,32 @@
+.header {
+    background-color:red;
+}
+
+.sidenav {
+    background-color:green;
+}
+
+.bodycontent {
+    background-color:blue;
+}
+
+.bodycontent .post {
+    background-color:purple;
+}
+
+.bodycontent .post .userinfo {
+    background-color:yellow;
+}
+
+.bodycontent .post .postcontent {
+    background-color:orange;
+}
+
+.bodycontent .post .postcontent .posttext {
+    background-color:pink;
+}
+
+.bodycontent .post .postimage {
+    background-color:teal;
+}
+
