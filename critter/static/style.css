@@ -1,22 +1,79 @@
+.sidenav a {
+    display:block;
+    padding:5px;
+}
+
+.page {
+    background-color:#FFCB47;
+    display: flex;
+    flex-direction: row;
+}
+
+.profilecircle {
+    background: #8AA1B1;
+    object-fit:cover;
+    border-radius:50%;
+}
+
 .header {
     background-color:#FFCB47;
+    display: flex;
+    flex-direction: row;
+}
+
+.header img {
+    width:15%;
+    display:inline-block;
+}
+
+.header input {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    border: none;
+    font-size: 17px;
+}
+
+.header .topnav {
+    display:inline-block;
 }
 
 .sidenav {
     background-color:#FFCB47;
+    float: left;
+    width:15%;
 }
 
 .bodycontent {
     background-color:#8AA1B1;
+    padding:5px;
+    float: none;
+    overflow: hidden;
 }
 
 .bodycontent .post {
     background-color:#9AC2C9;
+    margin:25px;
+    padding:15px;
 }
 
 .bodycontent .post .userinfo {
+    padding:5px;
     background-color:#9AC2C9;
     color:#3E4338;
+    position: relative;
+}
+
+.bodycontent .post .userinfo p{
+    display:inline-block;
+    position: absolute; top: 0;
+}
+
+.bodycontent .post .userinfo img{
+    display:inline-block;
+    height:50px;
+    width:50px;
 }
 
 .bodycontent .post .postcontent {
