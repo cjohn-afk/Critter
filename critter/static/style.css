@@ -1,32 +1,34 @@
 .header {
-    background-color:red;
+    background-color:#FFCB47;
 }
 
 .sidenav {
-    background-color:green;
+    background-color:#FFCB47;
 }
 
 .bodycontent {
-    background-color:blue;
+    background-color:#8AA1B1;
 }
 
 .bodycontent .post {
-    background-color:purple;
+    background-color:#9AC2C9;
 }
 
 .bodycontent .post .userinfo {
-    background-color:yellow;
+    background-color:#9AC2C9;
+    color:#3E4338;
 }
 
 .bodycontent .post .postcontent {
-    background-color:orange;
+    /* NOTHING HERE FOR NOW */
 }
 
 .bodycontent .post .postcontent .posttext {
-    background-color:pink;
+    background-color:#9AC2C9;
+    color:#3E4338;
 }
 
 .bodycontent .post .postimage {
-    background-color:teal;
+    /* NOTHING HERE FOR NOW */
 }
 
