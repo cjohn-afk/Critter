@@ -8,6 +8,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.3
 MarkupSafe==2.0.1
 pip==22.0.3
+pymysql==1.0.2
 setuptools==56.0.0
 SQLAlchemy==1.4.31
 Werkzeug==2.0.2

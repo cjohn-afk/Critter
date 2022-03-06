@@ -1,10 +1,20 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+import pyodbc
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/Critter'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+from critter import db_queries
+
 @app.route('/')
 def root_dir():
-    return "<b>HELLO, WORLD!</b>"
+	#return "<p> test </p>"
+    return "<b>" + db_queries.getPostByUserID(2)["Text"] + "</b>"
 
 @app.route('/about/')
 def about():
