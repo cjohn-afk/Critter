@@ -46,4 +46,4 @@ def profile(username):
 def settings():
     return render_template('settings.html')
 
-app.run()
+#app.run()
