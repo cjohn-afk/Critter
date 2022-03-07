@@ -1,15 +1,13 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-#import pyodbc
+from db_models import db
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/Critter'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://USER@PATHTOSERVER'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
-
-from critter import db_queries
+db.init_app(app)
 
 @app.route('/')
 def root_dir():
@@ -47,3 +45,5 @@ def profile(username):
 @app.route('/settings/')
 def settings():
     return render_template('settings.html')
+
+app.run()
