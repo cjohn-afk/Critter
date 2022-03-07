@@ -1,91 +1,154 @@
-.sidenav a {
-    display:block;
-    padding:5px;
+:root {
+	--background1: #FFFFFF;
+	--background2: #DDDDDD;
+	--background3: #BBBBBB;
+	--accent1: #FFCB47;
+	--accent2: #8AA1B1;
+	--accent3: #9AC2C9;
+	--textcolor1: #000000;
+	--textcolor2: #222222;
+	--textcolor3: #444444;
 }
 
-.page {
-    background-color:#FFCB47;
-    display: flex;
-    flex-direction: row;
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin:0px;
+}
+
+.row::after {
+	content:"";
+	clear: both;
+	display: block;
+}
+
+[class*="col-"]{
+	float: left;
+	padding: 15px;
+}
+
+html{
+	font-family: "Lucida Sans", sans-serif;
+}
+
+.header img{
+	vertical-align: top;
+	display: inline-block;
+	height:35px;
+    margin: 4px;
 }
 
 .profilecircle {
     background: #8AA1B1;
     object-fit:cover;
     border-radius:50%;
+	height: 40px;
 }
 
 .header {
-    background-color:#FFCB47;
-    display: flex;
-    flex-direction: row;
-}
-
-.header img {
-    width:15%;
-    display:inline-block;
+	background-color: var(--background2);
+	color: var(--textcolor1);
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
 }
 
 .header input {
-    float: right;
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
+	display: inline-block;
+    padding: 7px;
+    margin: 4px;
     border: none;
     font-size: 17px;
 }
 
-.header .topnav {
-    display:inline-block;
+.page {
+	background-color: var(--background2);
+	color: var(--background1);
 }
 
-.sidenav {
-    background-color:#FFCB47;
-    float: left;
-    width:15%;
+.menu {
 }
 
-.bodycontent {
-    background-color:#8AA1B1;
-    padding:5px;
-    float: none;
-    overflow: hidden;
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.bodycontent .post {
-    background-color:#9AC2C9;
-    margin:25px;
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: var(--accent2);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.menu li:hover {
+  background-color: var(--accent3);
+}
+
+.post {
+    background-color: var(--background2);
+    margin-bottom:15px;
     padding:15px;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.bodycontent .post .userinfo {
-    padding:5px;
-    background-color:#9AC2C9;
-    color:#3E4338;
-    position: relative;
+.post:hover {
+  background-color: var(--background1);
 }
 
-.bodycontent .post .userinfo p{
+.post .userinfo p{
     display:inline-block;
-    position: absolute; top: 0;
+	vertical-align: top;
 }
 
-.bodycontent .post .userinfo img{
+.post .userinfo img{
     display:inline-block;
     height:50px;
     width:50px;
 }
 
-.bodycontent .post .postcontent {
-    /* NOTHING HERE FOR NOW */
+.post .posttext {
+	margin: 0px;
+	margin-top: 10px;
 }
 
-.bodycontent .post .postcontent .posttext {
-    background-color:#9AC2C9;
-    color:#3E4338;
+.bodyContent {
+	background-color: var(--background1);
 }
 
-.bodycontent .post .postimage {
-    /* NOTHING HERE FOR NOW */
+.profilePanel {
+	background-color: var(--background1);
 }
 
+.footer {
+	background-color: var(--background3);
+	color: var(--textcolor1);
+	text-align: center;
+	font-size:12px;	
+}
+
+/* For desktop: */
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}

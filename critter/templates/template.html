@@ -11,22 +11,19 @@
     <body>
         <div class="header" id="header">
             <img src="../static/logov1.png">
-            <div class="topnav">
-                <input type="text" placeholder="Search..">
-                <div class="userprofile">
-
-                </div>
-            </div>
+            <input type="text" placeholder="Search..">
         </div>
-        <div class="page" id="page">
-            <div class="sidenav" id="sidenav">
-                <!-- DYNAMIC CREATION OF NAVIGATION BASED ON STRUCTURE OF SITE-->
+        <div class="row" id="page">
+            <div class="col-3 menu" id="sideNav">
+				<!-- DYNAMIC CREATION OF NAVIGATION BASED ON STRUCTURE OF SITE-->
                 <!-- Below is a filler navbar-->
-                <a href="../critter/login.html" class="active">Login</a>
-                <a href="../critter/profile.html" class="active">Profile</a>
-                <a href="../critter/timeline.html" class="active">Timeline</a>
+				<ul>
+					<li><a href="../critter/login.html" class="active">Login</a></li>
+					<li><a href="../critter/profile.html" class="active">Profile</a></li>
+					<li><a href="../critter/timeline.html" class="active">Timeline</a></li>
+				</ul>
             </div>
-            <div class="bodycontent">
+            <div class="col-6" id="pageContents">
                 <!-- DYNAMIC INTEGRATION FOR OTHER PAGES-->
                 <!-- This is the timeline-->
                 <div class="post">
@@ -84,6 +81,11 @@
                     </div>
                 </div>
             </div>
+			<div class="col-3 right">
+				<div class="profilePanel">
+					
+				</div>
+			</div>
         </div>
     </body>
 </html>
