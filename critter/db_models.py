@@ -5,6 +5,10 @@ from flask_login import UserMixin, LoginManager
 db = SQLAlchemy()
 login = LoginManager()
 
+@login.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
+
 class Users(UserMixin, db.Model):
 
 	__tablename__ = "Users"
@@ -92,7 +96,3 @@ class Follows(db.Model):
 	id = db.Column(db.Integer, primary_key = True)					#Relationship ID
 	uid = db.Column(db.Integer, db.ForeignKey(User_Profiles.id))	#Follower's ID
 	fid = db.Column(db.Integer, db.ForeignKey(User_Profiles.id))	#Followed's ID
-
-
-
-
