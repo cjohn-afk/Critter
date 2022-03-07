@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-import pyodbc
+#import pyodbc
 
 app = Flask(__name__)
 
@@ -13,8 +13,8 @@ from critter import db_queries
 
 @app.route('/')
 def root_dir():
-	#return "<p> test </p>"
-    return "<b>" + db_queries.getPostByUserID(2)["Text"] + "</b>"
+	return "<p> test </p>"
+    #return "<b>" + db_queries.getPostByUserID(2)["Text"] + "</b>"
 
 @app.route('/about/')
 def about():
