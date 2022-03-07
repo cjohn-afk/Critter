@@ -2,87 +2,31 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <title>
-            {{ page_title | default("Critter") }}
-		</title>
+        <title> {{ page_title | default("Critter") }} </title>
         <link rel="stylesheet" type="text/css" href="../static/style.css">
     </head>
     <body>
         <div class="header" id="header">
-            <img src="../static/logov1.png">
-            <input type="text" placeholder="Search..">
+            <img src="{{ url_for('static', filename="logov1.png") }}">
+            <input type="text" placeholder="Search...">
         </div>
         <div class="row" id="page">
             <div class="col-3 menu" id="sideNav">
 				<!-- DYNAMIC CREATION OF NAVIGATION BASED ON STRUCTURE OF SITE-->
+                {% block navbar %}{% endblock %}
                 <!-- Below is a filler navbar-->
 				<ul>
-					<li><a href="../critter/login.html" class="active">Login</a></li>
-					<li><a href="../critter/profile.html" class="active">Profile</a></li>
-					<li><a href="../critter/timeline.html" class="active">Timeline</a></li>
+					<li><a href="{{ url_for('login') }}" class="active">Login</a></li>
+					<li><a href="{{ url_for('profile') }}" class="active">Profile</a></li>
+					<li><a href="{{ url_for('timeline') }}" class="active">Timeline</a></li>
 				</ul>
             </div>
-            <div class="col-6" id="pageContents">
-                <!-- DYNAMIC INTEGRATION FOR OTHER PAGES-->
-                <!-- This is the timeline-->
-                <div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Critter Official</p>
-                    </div>
-                    <div class="postcontent">
-                        <p class="posttext">We're making a social media app that focuses on security!</p>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Critter Official</p>
-                    </div>
-                    <div class="postcontent">
-                        <!-- Lorem Ipsum 300 Character to test bounding-->
-                        <p class="posttext">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.</p>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Critter Official</p>
-                    </div>
-                    <div class="postcontent">
-                        <!-- Lorem Ipsum 300 Character to test bounding-->
-                        <p class="posttext">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.</p>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Critter Official</p>
-                    </div>
-                    <div class="postcontent">
-                        <!-- Lorem Ipsum 300 Character to test bounding-->
-                        <p class="posttext">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.</p>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Critter Official</p>
-                    </div>
-                    <div class="postcontent">
-                        <!-- Lorem Ipsum 300 Character to test bounding-->
-                        <p class="posttext">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.</p>
-                    </div>
-                </div>
+            <!-- THIS IS WHERE THE REST OF THIS PAGE WOULD GO -->
+            {% block content %}{% endblock %}
             </div>
 			<div class="col-3 right">
 				<div class="profilePanel">
-					
+                    {% block profile_info %}{% endblock %}
 				</div>
 			</div>
         </div>
