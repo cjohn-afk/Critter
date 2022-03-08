@@ -1,15 +1,14 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, flash, get_flashed_messages, url_for
 from flask_sqlalchemy import SQLAlchemy
-from db_models import Users, db, login
-import db_queries
 from flask_login import login_required, current_user, login_user, logout_user
+from db_models import User_Profiles, Users, db, login
+import db_queries
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' ##DONT USE THIS IN PRODUCTION, JUST FOR TESTING
 
 ## SQL Configuration ##
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testing.db' #for testing
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://USER@PATHTOSERVER'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/Critter'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ####
@@ -33,6 +32,7 @@ login.login_view = 'login'
 def timeline():
 	return render_template('timeline.html')
 
+@app.route('/profile/<string:username>', defaults={'username': None})
 @app.route('/profile/<string:username>')
 @login_required
 def profile(username):
@@ -50,20 +50,28 @@ def settings():
 
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
+    login_failed = False
     if current_user.is_authenticated:
-            return redirect('/')
+            return redirect(url_for('timeline'))
     
     if request.method == 'POST':
         email = request.form['email']
-        user  = Users.query.filter_by(email = email).first()
+        user  = Users.query.filter_by(Email = email).first()
+
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
-            return redirect('/')
+            return redirect(url_for('timeline'))
         else:
-            ## show "Either password incorrect or no user with email *PROVIDED EMIAL*" error message on login screen.
+            #show "Either password incorrect or no user with email *PROVIDED EMIAL*" error message on login screen.
+            login_failed = True
             pass
 
-    return render_template('login.html')
+    return render_template('login.html', login_failed=login_failed)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/signup')
 def sign_up():
@@ -77,4 +85,4 @@ def about():
 def contact():
     return render_template('contact.html')
 
-app.run() #for testing
+#app.run() #for testing
