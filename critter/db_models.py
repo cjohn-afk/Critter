@@ -21,6 +21,10 @@ class Users(UserMixin, db.Model):
 	# Create the relationship between Users and User_Profiles
 	user_profiles = db.relationship('User_Profiles', backref='users', uselist=False)
 
+	# get_id function needs to be overridden because UserID is not named 'id'
+	def get_id(self):
+		return self.UserID
+
 	#Creates a password hash from a given password.
 	def set_password(self, password):
 		self.Password = generate_password_hash(password)
