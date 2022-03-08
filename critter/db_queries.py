@@ -104,8 +104,9 @@ def getPostsByUserID(id):
 	else:
 		return None
 		
-def insertUser(username, email, password_hash, gender, bio, avatar):
-	user = db_models.Users(Username=username, Email=email, Password=password_hash)
+def insertUser(username, email, password, gender, bio, avatar):
+	user = db_models.Users(Username=username, Email=email)
+	user.set_password(password)
 	user_profile = db_models.User_Profiles(Username=username, Gender=gender, Bio=bio, Avatar=avatar)
 	db.session.add(user)
 	db.session.add(user_profile)
