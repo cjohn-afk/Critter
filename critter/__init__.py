@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from db_models import Users, db, login
+import db_queries
 from flask_login import login_required, current_user, login_user, logout_user
 
 app = Flask(__name__)
@@ -8,7 +9,8 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' ##DONT USE THIS IN PRODUCTION, JUST FOR
 
 ## SQL Configuration ##
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testing.db' #for testing
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://USER@PATHTOSERVER'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://USER@PATHTOSERVER'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/Critter'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ####
 
@@ -75,4 +77,4 @@ def about():
 def contact():
     return render_template('contact.html')
 
-#app.run() #for testing
+app.run() #for testing

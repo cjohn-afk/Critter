@@ -36,13 +36,13 @@ def getUserLoginInfoByUsername(username):
 	
 # Returns dictionary with user profile info		
 def getUserProfileInfoByID(id):
-	result = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.id == id).first()
+	result = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.UserID == id).first()
 	if result is not None:
 		info = {
-			"id": result.id,
-			"username": result.username,
-			"gender": result.gender,
-			"bio": result.bio
+			"UserID": result.UserID,
+			"Username": result.Username,
+			"Gender": result.Gender,
+			"Bio": result.Bio
 			#"Avatar": result.Avatar
 		}
 		return info
@@ -51,13 +51,13 @@ def getUserProfileInfoByID(id):
 	
 # Returns dictionary with user profile info	
 def getUserProfileInfoByUsername(username):
-	result = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.username == username).first()
+	result = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.Username == username).first()
 	if result is not None:
 		info = {
-			"id": result.id,
-			"username": result.username,
-			"gender": result.gender,
-			"bio": result.bio
+			"UserID": result.UserID,
+			"Username": result.Username,
+			"Gender": result.Gender,
+			"Bio": result.Bio
 			#"Avatar": result.Avatar
 		}
 		return info
@@ -66,15 +66,15 @@ def getUserProfileInfoByUsername(username):
 
 # Returns a dictionary with post info
 def getPostByPostID(id):
-	result = db.session.query(db_models.Posts).filter(db_models.Posts.id == id).first()
+	result = db.session.query(db_models.Posts).filter(db_models.Posts.PostID == id).first()
 	if result is not None:
 		info = {
-			"id": result.id,
-			"uid": result.uid,
-			"type": result.type,
-			"text": result.text,
-			"mid": result.mid,
-			"time": result.time
+			"PostID": result.PostID,
+			"UserID": result.UserID,
+			"PostType": result.PostType,
+			"Text": result.Text,
+			"MediaID": result.MediaID,
+			"PostTime": result.PostTime
 		}
 		return info
 	else:
@@ -82,15 +82,15 @@ def getPostByPostID(id):
 
 # Returns the *most recent* post by the user
 def getPostByUserID(id):
-	result = db.session.query(db_models.Posts).filter(db_models.Posts.uid == id).first()
+	result = db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).first()
 	if result is not None:
 		info = {
-			"id": result.id,
-			"uid": result.uid,
-			"type": result.type,
-			"text": result.text,
-			"mid": result.mid,
-			"time": result.time
+			"PostID": result.PostID,
+			"UserID": result.UserID,
+			"PostType": result.PostType,
+			"Text": result.Text,
+			"MediaID": result.MediaID,
+			"PostTime": result.PostTime
 		}
 		return info
 	else:
@@ -103,3 +103,19 @@ def getPostsByUserID(id):
 		return result
 	else:
 		return None
+		
+def insertUser(username, email, password_hash, gender, bio, avatar):
+	user = db_models.Users(Username=username, Email=email, Password=password_hash)
+	user_profile = db_models.User_Profiles(Username=username, Gender=gender, Bio=bio, Avatar=avatar)
+	db.session.add(user)
+	db.session.add(user_profile)
+	db.session.commit()
+	
+	return username
+	
+def insertPost(userid, post_type, text, mediaid, post_time):
+	post = db_models.Posts(UserID=userid, PostType=post_type, Text=text, MediaID=mediaid, PostTime=post_time)
+	db.session.add(post)
+	db.session.commit()
+	
+	return text
