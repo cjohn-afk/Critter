@@ -90,6 +90,34 @@ html{
   	background-color: var(--accent3);
 }
 
+.profile {
+    background-color: var(--background2);
+    margin-bottom:15px;
+    padding:15px;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.profile:hover {
+  	background-color: var(--background1);
+}
+
+.profile .profileinfo {
+	vertical-align: top;
+	width: 68%;
+	display: inline-block;
+	margin: 0px;
+	margin-left: 15px;
+}
+
+.profile img {
+	width: 25%;
+	display: inline-block;
+	height: 25%;
+	margin: 0px;
+	margin-top: 10px;
+}
+
 .post {
     background-color: var(--background2);
     margin-bottom:15px;

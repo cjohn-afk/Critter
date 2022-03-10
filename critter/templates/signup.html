@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+			<!-- DYNAMIC PAGE NAME GOES HERE -->
+            PAGE NAME HERE
+		</title>
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+    </head>
+    <body>
+        <div class="header" id="header">
+            <img src="../static/logov1.png">
+            <input type="text" placeholder="Search..">
+        </div>
+        <div class="row" id="page">
+            <div class="col-3 menu" id="sideNav">
+				<!-- DYNAMIC CREATION OF NAVIGATION BASED ON STRUCTURE OF SITE-->
+                <!-- Below is a filler navbar-->
+				<ul>
+					<li><a href="../critter/login.html" class="active">Login</a></li>
+					<li><a href="../critter/profile.html" class="active">Profile</a></li>
+					<li><a href="../critter/timeline.html" class="active">Timeline</a></li>
+				</ul>
+            </div>
+            <div class="col-9" id="loginContents">
+                <!-- DYNAMIC INTEGRATION FOR OTHER PAGES-->
+                <!-- This is the timeline-->
+                <div class="login">
+                	<form action="PUT LOGIN PAGE REDIRECT HERE" method="post">
+						<div class="credentials">
+							<label for="uname"><b>Username</b></label>
+    						<input type="text" placeholder="Enter Username" name="uname" id="uname" onchange="confirmPasswordsMatch()" required>
+							
+							<label for="email"><b>Email</b></label>
+    						<input type="text" placeholder="Enter Email" name="email" id="email" onchange="confirmPasswordsMatch()" required>
+
+    						<label for="psw"><b>Password</b></label>
+    						<input type="password" placeholder="Enter Password" name="psw" id="psw" onchange="confirmPasswordsMatch()" required>
+							
+							<label for="psw"><b>Confirm Password</b></label>
+    						<input type="password" placeholder="Confirm Password" name="pswconfirm" id="pswconfirm" onchange="confirmPasswordsMatch()" required>
+        
+							<button type="submit" id="submit" style="visibility:hidden;"><b>Create Account</b></button>
+    						<label>
+      							<input type="checkbox" checked="checked" name="remember"> Remember me
+    						</label>
+						</div>
+					</form>
+                </div>
+            </div>
+        </div>
+		<script>
+			function confirmPasswordsMatch(){
+				var password1 = document.getElementById("psw");
+				var password2 = document.getElementById("pswconfirm");
+				var uname = document.getElementById("uname");
+				var email = document.getElementById("email");
+				var submit = document.getElementById("submit");
+				
+				function validEmail(e) {
+    				var filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+    				return String(e).search (filter) != -1;
+				}
+				
+				if(password1.value == password2.value && password1.value != "" && password2.value != "" && uname && uname.value != "" && email && email.value != "" && validEmail(email.value)){
+					submit.style.visibility='visible';
+				}else{
+					submit.style.visibility='hidden';
+				}
+			}
+		</script>
+    </body>
+</html>
