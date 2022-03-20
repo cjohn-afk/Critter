@@ -97,8 +97,8 @@ def getPostByUserID(id):
 		return None
 
 # Returns a list of all posts by the user
-def getPostsByUserID(id):
-	result = db.session.query(db_models.Posts).filter(db_models.Posts.uid == id).all()
+def getPostsByUserID(id, n=50):
+	result = db.session.query(db_models.Posts).filter(db_models.Posts.uid == id).limit(n).all()
 	if result is not None:
 		return result
 	else:
