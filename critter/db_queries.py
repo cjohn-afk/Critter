@@ -6,104 +6,33 @@ from db_models import db
 
 # GET data methods
 def getUserLoginInfoByID(id):
-	result = db.session.query(db_models.Users).filter(db_models.Users.id == id).first()
-
-	if result is not None:
-		info = {
-			"id": result.id,
-			"username": result.username,
-			"email": result.email,
-			"password_hash": result.password_hash
-		}
-		return info
-	else:
-		return None
+	return db.session.query(db_models.Users).filter(db_models.Users.id == id).first()
 
 # Returns dictionary with user login info
 def getUserLoginInfoByUsername(username):
-	result = db.session.query(db_models.Users).filter(db_models.Users.Username == username).first()
-	
-	if result is not None:
-		info = {
-			"id": result.id,
-			"username": result.username,
-			"email": result.email,
-			"password_hash": result.password_hash
-		}
-		return info
-	else:
-		return None
+	return db.session.query(db_models.Users).filter(db_models.Users.Username == username).first()
 	
 # Returns dictionary with user profile info		
 def getUserProfileInfoByID(id):
-	result = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.UserID == id).first()
-	if result is not None:
-		info = {
-			"UserID": result.UserID,
-			"Username": result.Username,
-			"Gender": result.Gender,
-			"Bio": result.Bio
-			#"Avatar": result.Avatar
-		}
-		return info
-	else:
-		return None
+	return db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.UserID == id).first()
 	
 # Returns dictionary with user profile info	
 def getUserProfileInfoByUsername(username):
-	result = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.Username == username).first()
-	if result is not None:
-		info = {
-			"UserID": result.UserID,
-			"Username": result.Username,
-			"Gender": result.Gender,
-			"Bio": result.Bio
-			#"Avatar": result.Avatar
-		}
-		return info
-	else:
-		return None
+	return db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.Username == username).first()
 
 # Returns a dictionary with post info
 def getPostByPostID(id):
-	result = db.session.query(db_models.Posts).filter(db_models.Posts.PostID == id).first()
-	if result is not None:
-		info = {
-			"PostID": result.PostID,
-			"UserID": result.UserID,
-			"PostType": result.PostType,
-			"Text": result.Text,
-			"MediaID": result.MediaID,
-			"PostTime": result.PostTime
-		}
-		return info
-	else:
-		return None
+	return db.session.query(db_models.Posts).filter(db_models.Posts.PostID == id).first()
 
 # Returns the *most recent* post by the user
 def getPostByUserID(id):
-	result = db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).first()
-	if result is not None:
-		info = {
-			"PostID": result.PostID,
-			"UserID": result.UserID,
-			"PostType": result.PostType,
-			"Text": result.Text,
-			"MediaID": result.MediaID,
-			"PostTime": result.PostTime
-		}
-		return info
-	else:
-		return None
+	return db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).first()
 
 # Returns a list of all posts by the user
 def getPostsByUserID(id, n=50):
-	result = db.session.query(db_models.Posts).filter(db_models.Posts.uid == id).limit(n).all()
-	if result is not None:
-		return result
-	else:
-		return None
-		
+	return db.session.query(db_models.Posts).filter(db_models.Posts.uid == id).limit(n).all()
+
+# Inserts a user into the database. NOTE: avater must be a bytes-like object.
 def insertUser(username, email, password, gender, bio, avatar):
 	user = db_models.Users(Username=username, Email=email)
 	user.set_password(password)
