@@ -40,12 +40,11 @@ def insertUser(username, email, password, gender, bio, avatar):
 	db.session.add(user)
 	db.session.add(user_profile)
 	db.session.commit()
-	
-	return username
-	
+	# TODO: HANDLE POTENTIAL ERRORS CAUSED BY SESSION.COMMIT()
+
+# Inserts a post into the database.
 def insertPost(userid, post_type, text, mediaid, post_time):
 	post = db_models.Posts(UserID=userid, PostType=post_type, Text=text, MediaID=mediaid, PostTime=post_time)
 	db.session.add(post)
 	db.session.commit()
-	
-	return text
+	# TODO: HANDLE POTENTIAL ERRORS CAUSED BY SESSION.COMMIT()
