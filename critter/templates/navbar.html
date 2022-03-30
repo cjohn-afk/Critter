@@ -1,15 +1,13 @@
 <div class="col-3 menu" id="sideNav">
     <ul>
-        <li>
-            {% if current_user.is_authenticated %}
-                <!-- TODO: Change profile button into current user's profile photo -->
-                <li><a href="{{ url_for('profile') }}" class="active">Profile</a></li>
-                <li><a href="{{ url_for('messages') }}" class="active">Inbox</a></li>
-                <li><a href="{{ url_for('settings') }}" class="active">Settings</a></li>
-                <li><a href="{{ url_for('logout') }}" class="active">Logout</a></li>
-            {% else %}
-                <li><a href="{{ url_for('login') }}" class="active">Login</a></li>
-            {% endif %}
-        </li>
+        {% if current_user.is_authenticated %}
+            <!-- TODO: Change profile button into current user's profile photo -->
+            <li><a href="{{ url_for('profile') }}" class="active">Profile</a></li>
+            <li><a href="{{ url_for('messages') }}" class="active">Inbox</a></li>
+            <li><a href="{{ url_for('settings') }}" class="active">Settings</a></li>
+            <li><a href="{{ url_for('logout') }}" class="active">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}" class="active">Login</a></li>
+        {% endif %}
     </ul>
 </div>
