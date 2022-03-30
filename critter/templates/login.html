@@ -9,14 +9,17 @@
 
     		<label for="password"><b>Password</b></label>
     		<input type="password" placeholder="Enter Password" name="password" required>
+
             <span class="psw">Forgot <a href="#">password?</a></span>
     		<button type="submit">Login</button>
+
+			<input type="checkbox" name="remember" value="true">
+			<label for="remember">Remember me</label>
+			<input type="hidden" name="remember" value="false">
+
             {% if login_failed %}
             <p id="login_error">Either the password you entered was incorrect or no user with the provided email exists.</p>
             {% endif %}
-    		<label>
-      			<input type="checkbox" checked="checked" name="remember"> Remember me
-    		</label>
 		</div>
 	</form>
 </div>

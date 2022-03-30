@@ -8,8 +8,8 @@ app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' ##DONT USE THIS IN PRODUCTION, JUST FOR TESTING
 
 ## SQL Configuration ##
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testing.db' #for testing
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/Critter'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testing.db' #for testing
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/Critter'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ####
 
@@ -17,9 +17,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 ## Create Database File (for testing) ##
-#@app.before_first_request
-#def create_table():
-#    db.create_all()
+@app.before_first_request
+def create_table():
+    db.create_all()
 ####
 
 ## Initialize Login ##
@@ -57,9 +57,10 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         user  = Users.query.filter_by(Email = email).first()
+        remember_state = request.form['remember'] == "true"
 
         if user is not None and user.check_password(request.form['password']):
-            login_user(user)
+            login_user(user, remember=remember_state)
             return redirect(url_for('timeline'))
         else:
             #show "Either password incorrect or no user with email *PROVIDED EMIAL*" error message on login screen.
@@ -85,4 +86,4 @@ def about():
 def contact():
     return render_template('contact.html')
 
-#app.run() #for testing
+app.run() #for testing
