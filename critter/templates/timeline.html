@@ -7,8 +7,6 @@
 <div class="row" id="page">
     {% include 'navbar.html' %}
     <div class="col-6" id="pageContents">
-        <!-- DYNAMIC INTEGRATION FOR OTHER PAGES-->
-        <!-- This is the timeline-->
         <div class="post">
             <div class="userinfo">
                 <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
@@ -19,7 +17,7 @@
                 <p class="posttext">We're making a social media app that focuses on security!</p>
             </div>
         </div>
-        {% for n in range(4) %}
+        {% for n in range(50) %}
         <div class="post">
             <div class="userinfo">
                 <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
@@ -32,11 +30,6 @@
             </div>
         </div>
         {% endfor %}
-    </div>
-    <div class="col-3 right">
-        <div class="profilePanel">
-            
-        </div>
     </div>
 </div>
 {% endblock %}

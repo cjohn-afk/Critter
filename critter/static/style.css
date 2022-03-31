@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
+
 :root {
 	--background1: #FFFFFF;
 	--background2: #DDDDDD;
@@ -15,7 +17,12 @@
 }
 
 body{
-	margin:0px;	
+	margin:0px;
+	background-color: var(--textcolor2);
+}
+
+.row {
+	padding-top: 3em;
 }
 
 .row::after {
@@ -33,13 +40,6 @@ html{
 	font-family: "Lucida Sans", sans-serif;
 }
 
-.header img{
-	vertical-align: top;
-	display: inline-block;
-	height:35px;
-    margin: 4px;
-}
-
 .profilecircle {
     background: var(--accent2);
     object-fit:cover;
@@ -50,9 +50,11 @@ html{
 .header {
 	background-color: var(--background2);
 	color: var(--textcolor1);
+	position: fixed;
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
+	border-bottom: 1px var(--textcolor3) solid;
 }
 
 .header input {
@@ -63,30 +65,42 @@ html{
     font-size: 17px;
 }
 
+.header img{
+	vertical-align: top;
+	display: inline-block;
+	height:35px;
+    margin: 4px;
+}
+
 .page {
 	background-color: var(--background2);
 	color: var(--background1);
 }
 
 .menu {
+	display:flex;
+	flex-direction: column;
+  	margin: 0px;
+  	padding: 0px;
+	min-width: fit-content;
+	min-height: 100%;
+	float: right;
+	justify-content: center;
 }
 
-.menu ul {
-  	list-style-type: none;
-  	margin: 0;
-  	padding: 0;
-}
-
-.menu li {
+.menu a {
   	padding: 8px;
   	margin-bottom: 7px;
   	background-color: var(--accent2);
-  	color: var(--background1);
+	color: var(--textcolor3);
+	font-size: 1.5em;
+	text-decoration: none;
   	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	border-radius: 10px;
+	transition: all 0.25s ease-in-out;
 }
 
-.menu li:hover {
+.menu a:hover {
   	background-color: var(--accent3);
 }
 
@@ -124,10 +138,11 @@ html{
     padding:15px;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.25s ease-in-out;
 }
 
 .post:hover {
-  	background-color: var(--background1);
+  	background-color: var(--background3);
 }
 
 .post .userinfo p{
@@ -213,10 +228,10 @@ html{
 /* For desktop: */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
+.col-3 {width: 25%; height: 50vh; position:fixed;}
 .col-4 {width: 33.33%;}
 .col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
+.col-6 {width: 50%; float: right; margin-right:25%}
 .col-7 {width: 58.33%;}
 .col-8 {width: 66.66%;}
 .col-9 {width: 75%;}
