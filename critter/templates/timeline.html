@@ -7,15 +7,11 @@
 <div class="row" id="page">
     {% include 'navbar.html' %}
     <div class="col-6" id="pageContents">
-        <div class="post">
-            <div class="userinfo">
-                <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                <img class="profilecircle" src="{{ url_for('static', filename="CritterDefault.png") }}">
-                <p>Critter Official</p>
-            </div>
-            <div class="postcontent">
-                <p class="posttext">We're making a social media app that focuses on security!</p>
-            </div>
+        <div class="squeakBox">
+            <form action="{{ url_for('timeline') }}" method="POST">
+                <textarea id="text" name="text" rows="3" cols="60" maxlength="240" placeholder="Whats new?" spellcheck="true"></textarea>
+                <button type="submit">Post</button>
+            </form>
         </div>
         {% for n in range(50) %}
         <div class="post">
