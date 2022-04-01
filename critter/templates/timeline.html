@@ -13,16 +13,16 @@
                 <button type="submit">Post</button>
             </form>
         </div>
-        {% for n in range(50) %}
+        {% for p in posts %}
         <div class="post">
             <div class="userinfo">
                 <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
                 <img class="profilecircle" src="{{ url_for('static', filename="CritterDefault.png") }}">
-                <p>Critter Official</p>
+                <p>User ID: {{ p.UserID }}</p>
             </div>
             <div class="postcontent">
                 <!-- Lorem Ipsum 300 Character to test bounding-->
-                <p class="posttext">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.</p>
+                <p class="posttext">{{ p.Text }}</p>
             </div>
         </div>
         {% endfor %}

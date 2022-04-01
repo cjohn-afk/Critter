@@ -1,7 +1,9 @@
+from tkinter.messagebox import NO
+from urllib import response
 from flask import Flask, redirect, render_template, request, flash, get_flashed_messages, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_required, current_user, login_user, logout_user
-from db_models import User_Profiles, Users, db, login
+from flask_login import login_required, current_user, login_url, login_user, logout_user
+from db_models import Post_Types, User_Profiles, Users, db, login
 import db_queries
 
 app = Flask(__name__)
@@ -27,10 +29,14 @@ login.init_app(app)
 login.login_view = 'login'
 ####
 
-@app.route('/')
+@app.route('/', methods = ['POST', 'GET'])
 @login_required
 def timeline():
-	return render_template('timeline.html')
+    if request.method == 'POST' and request.form['text'] is not None:
+        db_queries.insertPost(current_user.get_id(), 'text', request.form['text'], None)
+        
+    posts = db_queries.getPostsByUserID(1) # TODO: Make method to return n latest posts from self and all followed accounts.
+    return render_template('timeline.html', posts=posts)
 
 @app.route('/profile/<string:username>', defaults={'username': None})
 @app.route('/profile/<string:username>')
