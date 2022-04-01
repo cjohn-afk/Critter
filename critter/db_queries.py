@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 import db_models
 from db_models import db
 
+from datetime import datetime
+from time import time
+
 # GET data methods
 def getUserLoginInfoByID(id):
 	return db.session.query(db_models.Users).filter(db_models.Users.id == id).first()
@@ -30,7 +33,7 @@ def getPostByUserID(id):
 
 # Returns a list of all posts by the user
 def getPostsByUserID(id, n=50):
-	return db.session.query(db_models.Posts).filter(db_models.Posts.uid == id).limit(n).all()
+	return db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).limit(n).all()
 
 # Inserts a user into the database. NOTE: avater must be a bytes-like object.
 def insertUser(username, email, password, gender, bio, avatar):
@@ -43,8 +46,8 @@ def insertUser(username, email, password, gender, bio, avatar):
 	# TODO: HANDLE POTENTIAL ERRORS CAUSED BY SESSION.COMMIT()
 
 # Inserts a post into the database.
-def insertPost(userid, post_type, text, mediaid, post_time):
-	post = db_models.Posts(UserID=userid, PostType=post_type, Text=text, MediaID=mediaid, PostTime=post_time)
+def insertPost(userid, post_type, text, mediaid):
+	post = db_models.Posts(UserID=userid, PostType=post_type, Text=text, MediaID=mediaid, PostTime=datetime.fromtimestamp(time()))
 	db.session.add(post)
 	db.session.commit()
 	# TODO: HANDLE POTENTIAL ERRORS CAUSED BY SESSION.COMMIT()
