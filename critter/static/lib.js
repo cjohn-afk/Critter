@@ -24,7 +24,7 @@ function updateState(API_URL, method, content) {
                 let likeButton = post.getElementsByClassName("like_icon")[0]
                 let likeNum = post.getElementsByClassName("num_likes")[0]
 
-                if (likeButton.innerHTML == "") {
+                if (likeButton.innerHTML == "favorite") {
                     likeButton.innerHTML += "_border"
                     likeNum.innerHTML = parseInt(likeNum.innerHTML) - 1
                 } else {
