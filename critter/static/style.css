@@ -300,6 +300,21 @@ html{
 	font-size:12px;	
 }
 
+/* Shamelessly copied from https://stackoverflow.com/questions/15907079/css3-transition-fade-out-effect thanks immayankmodi */
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity 1s linear;
+}
+/* end copypasta */
+
+.nospace {
+	width: 0%;
+	height: 0%;
+	margin: 0%;
+	padding: 0%;
+}
+
 /* For desktop: */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}

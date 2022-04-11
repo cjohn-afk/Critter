@@ -47,7 +47,10 @@ function deletePost(postID) {
     .then( response => {
         if (response.status == 200){
             let post = document.getElementById("post_" + postID)
-            post.hidden = "hidden";
+            post.classList += " hidden"
+            setTimeout(function(){
+                post.remove()
+            }, 1000);
         }
     })
 }
