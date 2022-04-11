@@ -1,5 +1,5 @@
 {% macro gen_post(userinfo, post) %}
-<div class="post">
+<div id="post_{{ post.PostID }}" class="post">
     <div class="userinfo">
         <img class="profilecircle" src="
             {% if userinfo.profile_URI is defined %}
@@ -16,9 +16,8 @@
     <div class="actions">
         <div class="like-button action-button" onclick="addLike({{ post.PostID }})">
             <!-- TODO: Make like button clickable. -->
-            <p id="num_likes">{% if post.likes is defined %} {{ post.likes|length }} {% else %} 0 {% endif %}</p>
-            <span id="like_icon" class="material-icons">favorite{% if current_user.UserID not in post.likes|map(attribute="id") or post.likes is not defined %}_border{% endif %}
-            </span>
+            <p class="num_likes">{% if post.likes is defined %} {{ post.likes|length }} {% else %} 0 {% endif %}</p>
+            <span class="material-icons like_icon">favorite{% if current_user.UserID not in post.likes|map(attribute="UserID") or post.likes is not defined %}_border{% endif %}</span>
         </div>
         <div class="comment-button action-button">
             <!-- TODO: ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->

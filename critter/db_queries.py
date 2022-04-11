@@ -54,8 +54,13 @@ def insertLike(userID, postID):
 
 # Deletes a like from the database.
 def deleteLike(userID, postID):
-	db.session.query(db_models.Likes).filter(db_models.Likes.UserID == userID, db_models.Likes.PostID == postID).delete()
-	db.session.commit()
+	likeQuery = db.session.query(db_models.Likes).filter(db_models.Likes.UserID == userID, db_models.Likes.PostID == postID)
+	if likeQuery.all() is not None:
+		likeID = likeQuery.first().LikeID
+		likeQuery.delete()
+		db.session.commit()
+		return likeID
+	return None
 
 # Inserts a user into the database. NOTE: avatar must be a bytes-like object.
 def insertUser(username, email, password, gender, bio, avatar):

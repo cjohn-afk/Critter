@@ -94,12 +94,15 @@ def contact():
 @app.route('/API/like', methods = ['POST'])
 def like():
     if request.method == 'POST':
-        result = db_queries.insertLike(current_user.get_id(), request.json['id'])
+        like = db_queries.getSpecificLike(current_user.get_id(), request.json['id'])
+        if like is None:
+            if db_queries.insertLike(current_user.get_id(), request.json['id']) is not None: result = "ADDED"
+        else:
+            if db_queries.deleteLike(current_user.get_id(), request.json['id']) is not None: result = "DELETED"
         if result is not None:
-            return str(result)
+            return result
         else:
             abort(409)
-            abort(Response('Like already exists!'))
     abort(400)
-    
+
 app.run() #for testing
