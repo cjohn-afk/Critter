@@ -1,3 +1,4 @@
+from queue import Empty
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -36,15 +37,22 @@ def getPostsByUserID(id, n=50):
 	return db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).limit(n).all()
 
 # Returns a list of all userIDs whom like a given post
-def getLikesbyPostID(id):
+def getLikesByPostID(id):
 	return db.session.query(db_models.Likes).filter(db_models.Likes.PostID == id).all()
+
+def getSpecificLike(userID, postID):
+	return db.session.query(db_models.Likes).filter(db_models.Likes.UserID == userID, db_models.Likes.PostID == postID).first()
 
 # Inserts a like int the database.
 def insertLike(userID, postID):
-	like = db_models.Likes(UserID = userID, PostID = postID)
-	db.session.add(like)
-	db.session.commit()
+	if getSpecificLike(userID, postID) is None:
+		like = db_models.Likes(UserID = userID, PostID = postID)
+		db.session.add(like)
+		db.session.commit()
+		return like.LikeID
+	return None
 
+# Deletes a like from the database.
 def deleteLike(userID, postID):
 	db.session.query(db_models.Likes).filter(db_models.Likes.UserID == userID, db_models.Likes.PostID == postID).delete()
 	db.session.commit()

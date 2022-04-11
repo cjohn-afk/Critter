@@ -1,6 +1,5 @@
-from tkinter.messagebox import NO
-from urllib import response
-from flask import Flask, redirect, render_template, request, flash, get_flashed_messages, url_for
+import re
+from flask import Flask, redirect, render_template, request, flash, get_flashed_messages, url_for, abort, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, current_user, login_url, login_user, logout_user
 from db_models import Post_Types, User_Profiles, Users, db, login
@@ -92,4 +91,15 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/API/like', methods = ['POST'])
+def like():
+    if request.method == 'POST':
+        result = db_queries.insertLike(current_user.get_id(), request.json['id'])
+        if result is not None:
+            return str(result)
+        else:
+            abort(409)
+            abort(Response('Like already exists!'))
+    abort(400)
+    
 app.run() #for testing

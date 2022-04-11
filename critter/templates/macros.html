@@ -14,10 +14,10 @@
         <p class="posttext">{{ post.Text }}</p>
     </div>
     <div class="actions">
-        <div class="like-button action-button">
+        <div class="like-button action-button" onclick="addLike({{ post.PostID }})">
             <!-- TODO: Make like button clickable. -->
             <p id="num_likes">{% if post.likes is defined %} {{ post.likes|length }} {% else %} 0 {% endif %}</p>
-            <span class="material-icons">favorite{% if current_user.UserID not in post.likes|map(attribute="id") or post.likes is not defined %}_border{% endif %}
+            <span id="like_icon" class="material-icons">favorite{% if current_user.UserID not in post.likes|map(attribute="id") or post.likes is not defined %}_border{% endif %}
             </span>
         </div>
         <div class="comment-button action-button">
