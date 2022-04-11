@@ -14,13 +14,13 @@
         <p class="posttext">{{ post.Text }}</p>
     </div>
     <div class="actions">
-        <div class="like-button">
+        <div class="like-button action-button">
             <!-- TODO: Make like button clickable. -->
             <p id="num_likes">{% if post.likes is defined %} {{ post.likes|length }} {% else %} 0 {% endif %}</p>
             <span class="material-icons">favorite{% if current_user.UserID not in post.likes|map(attribute="id") or post.likes is not defined %}_border{% endif %}
             </span>
         </div>
-        <div class="comment-button">
+        <div class="comment-button action-button">
             <!-- TODO: ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->
             <p id="num_comments">{% if posts.comments is defined %} {{ post.comments|length }} {% else %} 0 {% endif %}</p>
             <span class="material-icons">chat_bubble_outline</span>

@@ -167,29 +167,34 @@ html{
 }
 
 .post .actions {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	display: inline-flex;
 	width: 100%;
 	margin-top:1em;
 	margin-bottom: 0em;
 }
 
-.post .actions .like-button {
+.post .actions .action-button {
 	display: inline-flex;
-	align-self: center;
-	justify-content: center;
-	width: 50%;
-	text-align: center;
+	border-radius: 10px;
+	padding-top: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	transition: all 0.25s ease-in-out;
+}
+
+.post .actions .action-button:hover {
+	background-color: var(--background1);
+	cursor: pointer;
+}
+
+.post .actions .like-button {
+	margin-left: 25%;
+	margin-right: auto;
 }
 
 .post .actions .comment-button {
-	display: inline-flex;
-	align-self: center;
-	justify-content: center;
-	width: 50%;
-	text-align: center;
+	margin-left: auto;
+	margin-right: 25%;
 }
 
 .bodyContent {
