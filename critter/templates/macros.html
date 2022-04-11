@@ -16,16 +16,13 @@
     <div class="actions">
         <div class="like-button">
             <!-- TODO: Make like button clickable. -->
-            <p id="num_likes">{{ post.likes|length }}</p>
-            <span class="material-icons">favorite
-                {% if current_user.get_id() not in post.likes|map(attribute="id") %}
-                    _border
-                {% endif %}
+            <p id="num_likes">{% if post.likes is defined %} {{ post.likes|length }} {% else %} 0 {% endif %}</p>
+            <span class="material-icons">favorite{% if current_user.UserID not in post.likes|map(attribute="id") or post.likes is not defined %}_border{% endif %}
             </span>
         </div>
         <div class="comment-button">
             <!-- TODO: ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->
-            <p id="num_comments">{{ post.comments|length }}</p>
+            <p id="num_comments">{% if posts.comments is defined %} {{ post.comments|length }} {% else %} 0 {% endif %}</p>
             <span class="material-icons">chat_bubble_outline</span>
         </div>
     </div>
@@ -35,7 +32,7 @@
 {% macro display_posts(posts) %}
 
     {% for u,p in posts %}
-        {% call gen_post(u, p) %}
+        {% call gen_post(u, p) %}{% endcall %}
     {% endfor %}
-    
+
 {% endmacro %}

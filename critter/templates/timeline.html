@@ -1,4 +1,5 @@
 {% extends 'template.html' %}
+{% from "macros.html" import gen_post, display_posts with context %}
 {% block content%}
 <div class="header" id="header">
     <a href="{{ url_for('timeline') }}"><img src="{{ url_for('static', filename="logov1.png") }}"></a>
@@ -14,28 +15,8 @@
             </form>
         </div>
         {% for p in posts %}
-        <div class="post">
-            <div class="userinfo">
-                <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                <img class="profilecircle" src="{{ url_for('static', filename="CritterDefault.png") }}">
-                <p>User ID: {{ p.UserID }}</p>
-            </div>
-            <div class="postcontent">
-                <!-- Lorem Ipsum 300 Character to test bounding-->
-                <p class="posttext">{{ p.Text }}</p>
-            </div>
-            <div class="actions">
-                <div class="like-button">
-                    <!-- TODO: INSERT LOGIC TO SHOW NUMBER OF LIKES, AND SHOW FILLED OR OUTLINED HEART IF THE ACTIVE USER HAS LIKED THIS CONTENT -->
-                    <span class="material-icons">favorite</span>
-                    <span class="material-icons">favorite_border</span>
-                </div>
-                <div class="comment-button">
-                    <!-- TODO: DISPLAY NUMBER OF COMMENTS AND ALSO ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->
-                    <span class="material-icons">chat_bubble_outline</span>
-                </div>
-            </div>
-        </div>
+            {% set userinfo = { 'username': p.UserID } %}
+            {{ gen_post(userinfo, p) }}
         {% endfor %}
     </div>
 </div>

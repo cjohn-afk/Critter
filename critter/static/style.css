@@ -171,11 +171,17 @@ html{
 }
 
 .post .actions .like-button {
+	display: inline-flex;
+	align-self: center;
+	justify-content: center;
 	width: 50%;
 	text-align: center;
 }
 
 .post .actions .comment-button {
+	display: inline-flex;
+	align-self: center;
+	justify-content: center;
 	width: 50%;
 	text-align: center;
 }
