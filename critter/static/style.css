@@ -150,10 +150,15 @@ html{
 	vertical-align: top;
 }
 
+.post #username {
+	font-weight: bold;
+}
+
 .post .userinfo img{
     display:inline-block;
     height:50px;
     width:50px;
+	margin-right: 1em;
 }
 
 .post .posttext {
@@ -168,6 +173,7 @@ html{
 	align-items: center;
 	width: 100%;
 	margin-top:1em;
+	margin-bottom: 0em;
 }
 
 .post .actions .like-button {
