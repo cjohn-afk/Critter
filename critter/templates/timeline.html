@@ -24,6 +24,17 @@
                 <!-- Lorem Ipsum 300 Character to test bounding-->
                 <p class="posttext">{{ p.Text }}</p>
             </div>
+            <div class="actions">
+                <div class="like-button">
+                    <!-- TODO: INSERT LOGIC TO SHOW NUMBER OF LIKES, AND SHOW FILLED OR OUTLINED HEART IF THE ACTIVE USER HAS LIKED THIS CONTENT -->
+                    <span class="material-icons">favorite</span>
+                    <span class="material-icons">favorite_border</span>
+                </div>
+                <div class="comment-button">
+                    <!-- TODO: DISPLAY NUMBER OF COMMENTS AND ALSO ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->
+                    <span class="material-icons">chat_bubble_outline</span>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>

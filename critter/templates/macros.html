@@ -1,0 +1,41 @@
+{% macro gen_post(userinfo, post) %}
+<div class="post">
+    <div class="userinfo">
+        <img class="profilecircle" src="
+            {% if userinfo.profile_URI is defined %}
+                {{ url_for('static', filename=userinfo.profile_URI) }}
+            {% else %}
+                {{ url_for('static', filename="CritterDefault.png") }} 
+            {% endif %}
+        ">
+        <p>{{ userinfo.username }}</p>
+    </div>
+    <div class="postcontent">
+        <p class="posttext">{{ post.Text }}</p>
+    </div>
+    <div class="actions">
+        <div class="like-button">
+            <!-- TODO: Make like button clickable. -->
+            <p id="num_likes">{{ post.likes|length }}</p>
+            <span class="material-icons">favorite
+                {% if current_user.get_id() not in post.likes|map(attribute="id") %}
+                    _border
+                {% endif %}
+            </span>
+        </div>
+        <div class="comment-button">
+            <!-- TODO: ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->
+            <p id="num_comments">{{ post.comments|length }}</p>
+            <span class="material-icons">chat_bubble_outline</span>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro display_posts(posts) %}
+
+    {% for u,p in posts %}
+        {% call gen_post(u, p) %}
+    {% endfor %}
+    
+{% endmacro %}
