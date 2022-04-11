@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, current_user, login_url, login_user, logout_user
 from db_models import Post_Types, User_Profiles, Users, db, login
 import db_queries
+from jinja2 import Undefined
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' ##DONT USE THIS IN PRODUCTION, JUST FOR TESTING
@@ -103,6 +104,21 @@ def like():
             return result
         else:
             abort(409)
+    abort(400)
+
+@app.route('/API/post', methods = ['POST'])
+def post():
+    if request.method == 'POST':
+        if request.json.get('text') is not None:
+            db_queries.insertPost(current_user.get_id(), 'text', request.json['text'], None)
+            return "ADDED"
+        elif request.json.get('id') is not None:
+            post = db_queries.getPostByPostID(request.json['id'])
+            if post.UserID == current_user.get_id():
+                db_queries.deletePost(request.json['id'])
+                return "DELETED"
+            else:
+                abort(403)
     abort(400)
 
 app.run() #for testing

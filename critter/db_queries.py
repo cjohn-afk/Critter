@@ -78,3 +78,10 @@ def insertPost(userid, post_type, text, mediaid):
 	db.session.add(post)
 	db.session.commit()
 	# TODO: HANDLE POTENTIAL ERRORS CAUSED BY SESSION.COMMIT()
+
+def deletePost(postID):
+	post = db.session.query(db_models.Posts).filter(db_models.Posts.PostID == postID)
+	likes = db.session.query(db_models.Likes).filter(db_models.Likes.PostID == postID)
+	post.delete()
+	likes.delete()
+	db.session.commit()
