@@ -161,6 +161,25 @@ html{
 	margin-top: 10px;
 }
 
+.post .actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top:1em;
+}
+
+.post .actions .like-button {
+	width: 50%;
+	text-align: center;
+}
+
+.post .actions .comment-button {
+	width: 50%;
+	text-align: center;
+}
+
 .bodyContent {
 	background-color: var(--background1);
 }
