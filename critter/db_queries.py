@@ -35,7 +35,21 @@ def getPostByUserID(id):
 def getPostsByUserID(id, n=50):
 	return db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).limit(n).all()
 
-# Inserts a user into the database. NOTE: avater must be a bytes-like object.
+# Returns a list of all userIDs whom like a given post
+def getLikesbyPostID(id):
+	return db.session.query(db_models.Likes).filter(db_models.Likes.PostID == id).all()
+
+# Inserts a like int the database.
+def insertLike(userID, postID):
+	like = db_models.Likes(UserID = userID, PostID = postID)
+	db.session.add(like)
+	db.session.commit()
+
+def deleteLike(userID, postID):
+	db.session.query(db_models.Likes).filter(db_models.Likes.UserID == userID, db_models.Likes.PostID == postID).delete()
+	db.session.commit()
+
+# Inserts a user into the database. NOTE: avatar must be a bytes-like object.
 def insertUser(username, email, password, gender, bio, avatar):
 	user = db_models.Users(Username=username, Email=email)
 	user.set_password(password)
