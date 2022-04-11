@@ -44,5 +44,10 @@ function post(text) {
 
 function deletePost(postID) {
     updateState(postAPI, 'POST', postIDObj(postID))
-    .then( response => console.log(response))
+    .then( response => {
+        if (response.status == 200){
+            let post = document.getElementById("post_" + postID)
+            post.hidden = "hidden";
+        }
+    })
 }
