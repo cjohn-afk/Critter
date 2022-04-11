@@ -34,7 +34,7 @@ def getPostByUserID(id):
 
 # Returns a list of all posts by the user
 def getPostsByUserID(id, n=50):
-	return db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).limit(n).all()
+	return db.session.query(db_models.Posts).filter(db_models.Posts.UserID == id).order_by(db_models.Posts.PostTime.desc()).limit(n).all()
 
 # Returns a list of all userIDs whom like a given post
 def getLikesByPostID(id):
