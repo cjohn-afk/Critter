@@ -1,8 +1,9 @@
 <div class="col-3 ">
 <div class="menu" id="sideNav">
+        <img src="{{ url_for('static', filename='logo.png') }}" >
     {% if current_user.is_authenticated %}
         <!-- TODO: Change profile button into current user's profile photo -->
-        <a href="{{ url_for('profile') }}" class="active"><span class="material-icons">account_circle</span> Profile</a>
+        <a href="{{ url_for('profile', username=current_user.UserID) }}" class="active"><span class="material-icons">account_circle</span> Profile</a>
         <a href="{{ url_for('messages') }}" class="active"><span class="material-icons">email</span> Inbox</a>
         <a href="{{ url_for('settings') }}" class="active"><span class="material-icons">settings</span> Settings</a>
         <a href="{{ url_for('logout') }}" class="active"><span class="material-icons">logout</span> Logout</a>

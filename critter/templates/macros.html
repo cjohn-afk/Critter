@@ -1,12 +1,15 @@
 {% macro gen_post(userinfo, post) %}
 <div id="post_{{ post.PostID }}" class="post">
     <div class="userinfo">
-        <img class="profilecircle" src="{{ url_for('static', filename="CritterDefault.png") }}">
-        <p id="username">{{ userinfo[post.UserID]["username"] }}</p>
+        <a href="{{ url_for('profile', username=post.UserID) }}">
+            <img class="profilecircle" src="{{ url_for('static', filename="CritterDefault.png") }}">
+            <p id="username">{{ userinfo[post.UserID]["username"] }}</p>
+        </a>
     </div>
     <div class="postcontent">
         <p class="posttext">{{ post.Text }}</p>
     </div>
+    <hr>
     <div class="actions">
         <div class="like-button action-button" onclick="like({{ post.PostID }})">
             <!-- TODO: Make like button clickable. -->

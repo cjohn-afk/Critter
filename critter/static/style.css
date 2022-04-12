@@ -19,10 +19,11 @@
 body{
 	margin:0px;
 	background-color: var(--textcolor2);
+	display: inline;
 }
 
 .row {
-	padding-top: 3em;
+	padding-top: 0em;
 }
 
 .row::after {
@@ -82,10 +83,11 @@ html{
 	flex-direction: column;
   	margin: 0px;
   	padding: 0px;
+	max-width: fit-content;
 	min-width: fit-content;
 	min-height: 100%;
+	text-align: left;
 	float: right;
-	justify-content: center;
 }
 
 .menu a {
@@ -102,6 +104,11 @@ html{
 
 .menu a:hover {
   	background-color: var(--accent3);
+}
+
+.menu img {
+	width: 10em;
+	margin-bottom: 1em;
 }
 
 .profile {
@@ -136,9 +143,14 @@ html{
     background-color: var(--background2);
     margin-bottom:15px;
     padding:15px;
+	padding-bottom: 5px;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.25s ease-in-out;
+}
+
+.post hr {
+	border: var(--accent2) 1px solid;
 }
 
 .post:hover {
@@ -148,30 +160,42 @@ html{
 .post .userinfo p{
     display:inline-block;
 	vertical-align: top;
+	padding: 0px;
+	margin: 0px;
+}
+
+.post a {
+	text-decoration: none;
+	color: var(--textcolor2)
 }
 
 .post #username {
+	padding: 0em;
+	padding-top: 0.5em;
 	font-weight: bold;
+	font-size: 1.5em;
 }
 
 .post .userinfo img{
     display:inline-block;
-    height:50px;
-    width:50px;
+	height: 3em;
+    width:auto;
 	margin-right: 1em;
 }
 
 .post .posttext {
 	margin: 0px;
-	margin-top: 10px;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 .post .actions {
 	display: inline-flex;
 	width: 100%;
-	margin-top:1em;
+	margin-top:0em;
 	margin-bottom: 0em;
 	user-select: none;
+	justify-content: center;
 }
 
 .post .actions .action-button {
@@ -190,12 +214,12 @@ html{
 
 .post .actions .like-button {
 	margin-left: 25%;
-	margin-right: auto;
+	margin-right: 16.65%;
 }
 
 .post .actions .comment-button {
-	margin-left: auto;
-	margin-right: 25%;
+	margin-left: 16.65%;
+	margin-right: auto;
 }
 
 .bodyContent {
@@ -279,9 +303,13 @@ html{
 	outline: none !important;
 }
 
+.squeakBox .squeakRow {
+}
+
 .squeakBox button {
 	font-size: 24px;
 	font-weight: 500;
+	margin-left:85%;
 	border: none;
 	background-color: var(--background2);
 	border-radius: 10px;
@@ -318,10 +346,18 @@ html{
 /* For desktop: */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
-.col-3 {width: 25%; height: 50vh; position:fixed;}
+.col-3 {
+	width: 25%;
+	position:fixed;
+}
+
 .col-4 {width: 33.33%;}
 .col-5 {width: 41.66%;}
-.col-6 {width: 50%; float: right; margin-right:25%}
+.col-6 {
+	width: 50%;
+	float: right;
+	margin-right:25%;
+}
 .col-7 {width: 58.33%;}
 .col-8 {width: 66.66%;}
 .col-9 {width: 75%;}
@@ -335,4 +371,18 @@ html{
     width: 100%;
 	margin:0px;
   }
+  .col-3 {
+	  padding-left: 0em;
+	  max-width: fit-content;
+	  font-size: 0em;
+	}
+  .col-6 {
+	  margin:0px;
+	  padding:0em 3em 0em 3em;
+	  margin-left: 30%;
+	  margin-right: 0%;
+	  min-width: fit-content;
+	  width: 100%;
+	}
+
 }

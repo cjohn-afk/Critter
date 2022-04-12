@@ -98,49 +98,25 @@ def deletePost(postID):
 
 def getFollowedIDs(userID):
 	follows = db.session.query(db_models.Follows).filter(db_models.Follows.UserID == userID).all()
-	return follows
+	result=[]
+	for f in follows:
+		result.append(f.FollowingID)
+	return result
 
 def getUsernamesByID(ids=[]):
-	results = [
-		{
-			# example:
-			# "id": 72,
-			# "username": "user1227",
-			# "uri": "uri goes here"
-		},
-		{
-			# etc
-		}
-	]
+	results = {}
 
 	for id in ids:
-		try:
-			info = getUserProfileInfoByID(id)
-		except:
-			print("Error locating user.") # probably need to add more detailed error reporting here
-			continue
-		# just in case someone has no profile pic, we set a default
-		try:
-			uri = info.Avatar
-		except:
-			uri = None
-		
-		# UserID and Username must exist, doesn't matter if URI doesn't exist
-		if info is not None:
-			user = {
-				"id": info.UserID,
-				"username": info.Username,
-				"uri": uri
-			}
-			results.append(user)
-
+		profile = getUserProfileInfoByID(id)
+		if profile is not None:
+			results[id] = { "username": profile.Username, "avatar": profile.Avatar }
 	return results
 
 def getFollowedPosts(userID, n=50):
 	follows = getFollowedIDs(userID)
 	post_list = []
 	for follow in follows:
-		new_posts = getPostsByUserID(follow.FollowingID)
+		new_posts = getPostsByUserID(follow)
 		if new_posts is not None:
 			post_list += new_posts
 	

@@ -1,17 +1,15 @@
 {% extends 'template.html' %}
 {% from "macros.html" import gen_post, display_posts with context %}
 {% block content%}
-<div class="header" id="header">
-    <a href="{{ url_for('timeline') }}"><img src="{{ url_for('static', filename="logov1.png") }}"></a>
-    <input type="text" placeholder="Search..">
-</div>
 <div class="row" id="page">
     {% include 'navbar.html' %}
     <div class="col-6" id="pageContents">
         <div class="squeakBox">
             <form action="{{ url_for('timeline') }}" method="POST">
                 <textarea id="text" name="text" rows="3" cols="60" maxlength="240" placeholder="Whats new?" spellcheck="true"></textarea>
-                <button type="submit">Post</button>
+                <div class="squeakRow">
+                    <button type="submit">Post</button>
+                </div>
             </form>
         </div>
         {% for p in posts %}
