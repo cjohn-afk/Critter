@@ -82,6 +82,10 @@ html{
 	color: var(--background1);
 }
 
+.material-icons {
+	vertical-align: middle;
+}
+
 .menu {
 	display:flex;
 	flex-direction: column;
@@ -111,8 +115,6 @@ html{
 	margin: 0em;
 	box-shadow: none;
 	border-radius: 100%;
-	justify-content: center;
-	align-content: center;
 }
 
 .menu a.logo:hover {
@@ -138,6 +140,10 @@ html{
 	border: #000000 1px solid;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.profile .follow {
+	color: var(--background);
 }
 
 .profile .username {
@@ -174,7 +180,7 @@ html{
 	transition: all 0.25s ease-in-out;
 }
 
-.post hr {
+hr {
 	border: var(--accent2) 1px solid;
 }
 
@@ -213,7 +219,7 @@ html{
 	margin-bottom: 1em;
 }
 
-.post .actions {
+.actions {
 	display: inline-flex;
 	width: 100%;
 	margin-top:0em;
@@ -222,7 +228,7 @@ html{
 	justify-content: center;
 }
 
-.post .actions .action-button {
+.actions .action-button {
 	display: inline-flex;
 	border-radius: 10px;
 	padding-top: 1px;
@@ -231,17 +237,21 @@ html{
 	transition: all 0.25s ease-in-out;
 }
 
-.post .actions .action-button:hover {
+.actions .action-button .material-icons {
+	vertical-align: middle;
+}	
+
+.actions .action-button:hover {
 	background-color: var(--background1);
 	cursor: pointer;
 }
 
-.post .actions .like-button {
+.actions .like-button {
 	margin-left: 25%;
 	margin-right: 16.65%;
 }
 
-.post .actions .comment-button {
+.actions .comment-button {
 	margin-left: 16.65%;
 	margin-right: auto;
 }

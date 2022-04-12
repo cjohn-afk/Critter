@@ -151,4 +151,12 @@ def post():
                 abort(403)
     abort(400)
 
+@app.route('/API/follow', methods = ['POST'])
+def follow():
+    if request.method == 'POST':
+        ## TODO: MAKE FOLLOWING WORK!
+        pass
+
+    return ""
+
 app.run() #for testing

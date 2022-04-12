@@ -3,7 +3,7 @@
 {% block content%}
         <div class="row" id="page">
             {% include 'navbar.html' %}
-            <div class="col-6" id="page">
+            <div class="col-6" id="pageContents">
                 <div class="profile">
                     {% if profile.Avatar is not none %}
                         {% set profilePic = url_for('static', filename=profile.Avatar) %}
@@ -15,6 +15,12 @@
                         <p class="username">{{ profile.Username }}</p>
 						<p class="profiletext">{% if profile.Bio is not none %}{{ profile.Bio }}{% endif %}</p>
                     </div>
+                    {% if current_user.UserID != profile.UserID %}
+                    <hr>
+                    <div class="actions">
+                        <div class="fol-button action-button" onclick="follow({{ profile.UserID }})"><span class="material-icons follow_icon">person_add_alt</span>Follow</div>
+                    </div>
+                    {% endif %}
                 </div>
                 {% for p in posts %}
                     {{ gen_post(userinfo, p) }}

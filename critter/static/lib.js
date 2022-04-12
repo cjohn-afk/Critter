@@ -1,11 +1,12 @@
 var likeAPI = '/API/like'
 var postAPI = '/API/post'
+var followAPI = '/API/follow'
 
-function postIDObj(postID) {
+function IDObj(postID) {
     return { id: postID }
 }
 
-function postObj(text) {
+function textObj(text) {
     return { text: text }
 }
 
@@ -20,7 +21,7 @@ function updateState(API_URL, method, content) {
 }
 
 function like(postID) {
-    updateState(likeAPI, 'POST', postIDObj(postID))
+    updateState(likeAPI, 'POST', IDObj(postID))
     .then( response => {
         if (response.status == 200) {
             let post = document.getElementById("post_" + postID)
@@ -40,14 +41,14 @@ function like(postID) {
 
 function post() {
     text = document.getElementById("text").value
-    updateState(postAPI, 'POST', postObj(text))
+    updateState(postAPI, 'POST', textObj(text))
     .then( response => {
         
     })
 }
 
 function deletePost(postID) {
-    updateState(postAPI, 'POST', postIDObj(postID))
+    updateState(postAPI, 'POST', IDObj(postID))
     .then( response => {
         if (response.status == 200){
             let post = document.getElementById("post_" + postID)
@@ -55,6 +56,22 @@ function deletePost(postID) {
             setTimeout(function(){
                 post.remove()
             }, 1000);
+        }
+    })
+}
+
+function follow(userID) {
+    updateState(followAPI, 'POST', IDObj(userID))
+    .then( response => {
+        if (response.status == 200) {
+            let profile = document.getElementById("profile")
+            let followButton = profile.getElementsByClassName("follow_icon")[0]
+
+            if (followButton.innerHTML == "person_add_alt") {
+                followButton.innerHTML += "_1"
+            } else {
+                followButton.innerHTML = "person_add_alt"
+            }
         }
     })
 }
