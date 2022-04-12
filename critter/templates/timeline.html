@@ -15,7 +15,6 @@
             </form>
         </div>
         {% for p in posts %}
-            {% set userinfo = { 'username': p.UserID } %}
             {{ gen_post(userinfo, p) }}
         {% endfor %}
     </div>
