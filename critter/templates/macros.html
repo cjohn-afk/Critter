@@ -1,8 +1,13 @@
 {% macro gen_post(userinfo, post) %}
 <div id="post_{{ post.PostID }}" class="post">
     <div class="userinfo">
-        <a href="{{ url_for('profile', username=post.UserID) }}">
-            <img class="profilecircle" src="{{ url_for('static', filename="CritterDefault.png") }}">
+        <a href="{{ url_for('profile', userID=post.UserID) }}">
+            {% if userinfo[post.UserID]["avatar"] is not none %}
+                {% set profilePic = url_for('static', filename=userinfo[post.UserID]["avatar"]) %}
+            {% else %}
+                {% set profilePic = url_for('static', filename='CritterDefault.png') %}
+            {% endif %}
+            <img class="profilecircle" src="{{ profilePic }}">
             <p id="username">{{ userinfo[post.UserID]["username"] }}</p>
         </a>
     </div>

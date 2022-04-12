@@ -49,7 +49,6 @@ def getSpecificLike(userID, postID):
 
 def insertFollow(userID, followingID):
 	follow = db_models.Follows(UserID = userID, FollowingID = followingID)
-	print(follow.__dict__)
 	db.session.add(follow)
 	db.session.commit()
 
@@ -105,7 +104,6 @@ def getFollowedIDs(userID):
 
 def getUsernamesByID(ids=[]):
 	results = {}
-
 	for id in ids:
 		profile = getUserProfileInfoByID(id)
 		if profile is not None:
@@ -121,5 +119,4 @@ def getFollowedPosts(userID, n=50):
 			post_list += new_posts
 	
 	post_list.sort(reverse=True, key=(lambda e : e.PostTime))
-	print(post_list)
 	return post_list[0:n-1]

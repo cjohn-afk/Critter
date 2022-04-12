@@ -1,85 +1,25 @@
-<!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>
-			<!-- DYNAMIC PAGE NAME GOES HERE -->
-            PAGE NAME HERE
-		</title>
-        <link rel="stylesheet" type="text/css" href="../static/style.css">
-    </head>
-    <body>
-        <div class="header" id="header">
-            <img src="../static/logov1.png">
-            <input type="text" placeholder="Search..">
-        </div>
+{% extends 'template.html' %}
+{% block content%}
         <div class="row" id="page">
-            <div class="col-3 menu" id="sideNav">
-				<!-- DYNAMIC CREATION OF NAVIGATION BASED ON STRUCTURE OF SITE-->
-                <!-- Below is a filler navbar-->
-				<ul>
-					<li><a href="../critter/login.html" class="active">Login</a></li>
-					<li><a href="../critter/profile.html" class="active">Profile</a></li>
-					<li><a href="../critter/timeline.html" class="active">Timeline</a></li>
-				</ul>
-            </div>
-            <div class="col-6" id="aboutContents">
-                <!-- DYNAMIC INTEGRATION FOR OTHER PAGES-->
-                <!-- ALTHOUGH THIS IS AN ABOUT PAGE, WE CAN SIMPLY USE THE POST STYLING AS IT'D BE SET UP THE EXACT SAME WAY-->
+            {% include 'navbar.html' %}
+            <div class="col-6" id="page">
                 <div class="profile">
-					<!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-					<img class="profilecircle" src="../static/CritterDefault.png">
+                    {% if profile.Avatar is not none %}
+                        {% set profilePic = url_for('static', filename=profile.Avatar) %}
+                    {% else %}
+                        {% set profilePic = url_for('static', filename='CritterDefault.png') %}
+                    {% endif %}
+					<img class="profilecircle" src="{{ profilePic }}">
                     <div class="profileinfo">
-                        <p>Database Engineer: Austin Elliot</p>
+                        <p class="username">{{ profile.Username }}</p>
 						<p class="profiletext">Working primarily on the database as well as database side python functions, Austin has worked hard on the back end development for our website. Austin's extensive efforts to get a solid foundation for our project have allowed us to move forward with an otherwise very difficult project.</p>
                     </div>
                 </div>
-				<div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Database Engineer: Austin Elliot</p>
-                    </div>
-                    <div class="postcontent">
-                        <p class="posttext">Working primarily on the database as well as database side python functions, Austin has worked hard on the back end development for our website. Austin's extensive efforts to get a solid foundation for our project have allowed us to move forward with an otherwise very difficult project.</p>
-                    </div>
-                </div>
-				<div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Server Engineer: Chris John</p>
-                    </div>
-                    <div class="postcontent">
-                        <p class="posttext">With prior experience working with flask, Chris took charge with our projects direction to use the flask and jinja frameworks to develop the connection between html and database for our site. Chris also has constributed immensely to setting up everyone's git accounts for this project and wouldn't have been possible otherwise.</p>
-                    </div>
-                </div>
-				<div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Security Engineer: Paris Rowe</p>
-                    </div>
-                    <div class="postcontent">
-                        <p class="posttext">Having experience with encryption and a solid understanding of what makes a website safe, Paris is responsible for ensuring we implement all the correct safety procedures with our website. There is additionally a paper that accompanied the development of this site, Paris provided excellent direction for this document as well.</p>
-                    </div>
-                </div>
-				<div class="post">
-                    <div class="userinfo">
-                        <!-- NEEDS TO PULL USERS PROFILE, LOGO IS PLACEHOLDER-->
-                        <img class="profilecircle" src="../static/CritterDefault.png">
-                        <p>Design Lead: Miles Bednarski</p>
-                    </div>
-                    <div class="postcontent">
-                        <p class="posttext">Responsible for the flexible layout of our webisite, Miles has ensured that the pages use the correct jinja implementation to make the website modular. Familiar with CSS and website styling, Miles has made sure that the website isn't simply a skeleton and actually works on both desktop and mobile.</p>
-                    </div>
-                </div>
-            </div>
+				
 			<div class="col-3 right">
 				<div class="profilePanel">
 					
 				</div>
 			</div>
         </div>
-    </body>
-</html>
+{% endblock %}

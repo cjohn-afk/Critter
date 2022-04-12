@@ -32,8 +32,6 @@ login.login_view = 'login'
 @app.route('/', methods = ['POST', 'GET'])
 @login_required
 def timeline():
-
-
     if request.method == 'POST' and request.form['text'] is not None:
         db_queries.insertPost(current_user.get_id(), 'text', request.form['text'], None)
     
@@ -42,11 +40,17 @@ def timeline():
     userinfo = db_queries.getUsernamesByID(ids)
     return render_template('timeline.html', userinfo=userinfo, posts=posts)
 
-@app.route('/profile/<string:username>', defaults={'username': None})
-@app.route('/profile/<string:username>')
+@app.route('/profile/<string:userID>', defaults={'userID': None})
+@app.route('/profile/<string:userID>')
 @login_required
-def profile(username):
-    return render_template('profile.html')
+def profile(userID):
+    if userID is not None:
+        profile = db_queries.getUserProfileInfoByID(userID)
+        if profile is not None:
+            return render_template('profile.html', profile=profile)
+        else:
+            abort(404)
+    return render_template('profile.html', profile=db_queries.getUserProfileInfoByID(str(current_user.get_id())))
 
 @app.route('/messages')
 @login_required
@@ -103,10 +107,7 @@ def sign_up():
         else:
             db_queries.insertUser(username, email, password, gender, None, None)
             userID = db_queries.getUserLoginInfoByEmail(email).UserID
-            print("\n\n++++++++++" + str(userID) + "++++++++++\n\n")
-            for i in range(0,10):
-                print(i)
-                db_queries.insertFollow(userID, i)
+            db_queries.insertFollow(userID, userID)
             return redirect(url_for('login'))
 
     return render_template('signup.html')

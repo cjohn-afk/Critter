@@ -112,15 +112,18 @@ html{
 }
 
 .profile {
-    background-color: var(--background2);
+    background-color: inherit;
+	color: var(--background3);
     margin-bottom:15px;
     padding:15px;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.profile:hover {
-  	background-color: var(--background1);
+.profile .username {
+	font-size: 3em;
+	font-weight: bold;
+	font-style: italic;
 }
 
 .profile .profileinfo {
