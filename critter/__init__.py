@@ -36,7 +36,7 @@ def timeline():
         db_queries.insertPost(current_user.get_id(), 'text', request.form['text'], None)
     
     ids = db_queries.getFollowedIDs(current_user.get_id())
-    posts = db_queries.getFollowedPosts(current_user.get_id()) # TODO: Make method to return n latest posts from self and all followed accounts.
+    posts = db_queries.getFollowedPosts(current_user.get_id())
     userinfo = db_queries.getUsernamesByID(ids)
     return render_template('timeline.html', userinfo=userinfo, posts=posts)
 
@@ -47,7 +47,9 @@ def profile(userID):
     if userID is not None:
         profile = db_queries.getUserProfileInfoByID(userID)
         if profile is not None:
-            return render_template('profile.html', profile=profile)
+            userinfo = db_queries.getUsernamesByID([int(userID)])
+            posts = db_queries.getPostsByUserID(int(userID))
+            return render_template('profile.html', profile=profile, userinfo=userinfo, posts=posts)
         else:
             abort(404)
     return render_template('profile.html', profile=db_queries.getUserProfileInfoByID(str(current_user.get_id())))
