@@ -80,8 +80,26 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/signup')
+@app.route('/signup', methods = ['POST', 'GET'])
 def sign_up():
+    if current_user.is_authenticated:
+        return redirect(url_for('timeline'))
+
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        gender = request.form['gender']
+        if db_queries.getUserLoginInfoByUsername(username) is not None:
+            error = "Username is taken."
+            pass
+        elif db_queries.getUserLoginInfoByEmail(email) is not None:
+            error = "Email is taken."
+            pass
+        else:
+            db_queries.insertUser(username, email, password, gender, None, None)
+            return redirect(url_for('login'))
+            
     return render_template('signup.html')
 
 @app.route('/about')

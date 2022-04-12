@@ -15,7 +15,11 @@ def getUserLoginInfoByID(id):
 # Returns dictionary with user login info
 def getUserLoginInfoByUsername(username):
 	return db.session.query(db_models.Users).filter(db_models.Users.Username == username).first()
-	
+
+# Returns dictionary with user login info
+def getUserLoginInfoByEmail(email):
+	return db.session.query(db_models.Users).filter(db_models.Users.Email == email).first()
+
 # Returns dictionary with user profile info		
 def getUserProfileInfoByID(id):
 	return db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.UserID == id).first()

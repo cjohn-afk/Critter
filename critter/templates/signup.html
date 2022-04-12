@@ -1,74 +1,39 @@
-<!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>
-			<!-- DYNAMIC PAGE NAME GOES HERE -->
-            PAGE NAME HERE
-		</title>
-        <link rel="stylesheet" type="text/css" href="../static/style.css">
-    </head>
-    <body>
-        <div class="header" id="header">
-            <img src="../static/logov1.png">
-            <input type="text" placeholder="Search..">
-        </div>
-        <div class="row" id="page">
-            <div class="col-3 menu" id="sideNav">
-				<!-- DYNAMIC CREATION OF NAVIGATION BASED ON STRUCTURE OF SITE-->
-                <!-- Below is a filler navbar-->
-				<ul>
-					<li><a href="../critter/login.html" class="active">Login</a></li>
-					<li><a href="../critter/profile.html" class="active">Profile</a></li>
-					<li><a href="../critter/timeline.html" class="active">Timeline</a></li>
-				</ul>
-            </div>
-            <div class="col-9" id="loginContents">
-                <!-- DYNAMIC INTEGRATION FOR OTHER PAGES-->
-                <!-- This is the timeline-->
-                <div class="login">
-                	<form action="PUT LOGIN PAGE REDIRECT HERE" method="post">
-						<div class="credentials">
-							<label for="uname"><b>Username</b></label>
-    						<input type="text" placeholder="Enter Username" name="uname" id="uname" onchange="confirmPasswordsMatch()" required>
-							
-							<label for="email"><b>Email</b></label>
-    						<input type="text" placeholder="Enter Email" name="email" id="email" onchange="confirmPasswordsMatch()" required>
+{% extends 'template.html' %}
+{% block content%}
+<div class="login col-4">
+    <a href="{{ url_for('timeline') }}"><img src="{{ url_for('static', filename="logov1.png") }}"></a>
+    <form action="{{ url_for('sign_up') }}" method="POST">
+		<div class="credentials">
+			<label for="username"><b>Username</b></label>
+    		<input type="text" placeholder="Enter Username" name="username" required>
 
-    						<label for="psw"><b>Password</b></label>
-    						<input type="password" placeholder="Enter Password" name="psw" id="psw" onchange="confirmPasswordsMatch()" required>
-							
-							<label for="psw"><b>Confirm Password</b></label>
-    						<input type="password" placeholder="Confirm Password" name="pswconfirm" id="pswconfirm" onchange="confirmPasswordsMatch()" required>
-        
-							<button type="submit" id="submit" style="visibility:hidden;"><b>Create Account</b></button>
-    						<label>
-      							<input type="checkbox" checked="checked" name="remember"> Remember me
-    						</label>
-						</div>
-					</form>
-                </div>
-            </div>
-        </div>
-		<script>
-			function confirmPasswordsMatch(){
-				var password1 = document.getElementById("psw");
-				var password2 = document.getElementById("pswconfirm");
-				var uname = document.getElementById("uname");
-				var email = document.getElementById("email");
-				var submit = document.getElementById("submit");
-				
-				function validEmail(e) {
-    				var filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
-    				return String(e).search (filter) != -1;
-				}
-				
-				if(password1.value == password2.value && password1.value != "" && password2.value != "" && uname && uname.value != "" && email && email.value != "" && validEmail(email.value)){
-					submit.style.visibility='visible';
-				}else{
-					submit.style.visibility='hidden';
-				}
-			}
-		</script>
-    </body>
-</html>
+			<label for="gender"><b>Gender</b></label>
+    		<input list="select" name="gender">
+			<datalist class="form-control" id="select">    
+  				<option value="Male">
+  				<option value="Female">
+			</datalist>
+
+			<label for="email"><b>Email</b></label>
+    		<input type="text" placeholder="Enter Email" name="email" required>
+
+    		<label for="password"><b>Password</b></label>
+    		<input type="password" placeholder="Enter Password" name="password" required>
+
+			<label for="conf-password"><b>Password</b></label>
+    		<input type="password" placeholder="Enter Password Again..." name="conf-password" required>
+
+            <span class="psw">Forgot <a href="#">password</a>?</span>
+    		<button type="submit">Login</button>
+
+			<input type="checkbox" name="remember" value="true">
+			<label for="remember">Remember me</label>
+			<input type="hidden" name="remember" value="false">
+
+            {% if login_failed %}
+            <p id="login_error">Either the password you entered was incorrect or no user with the provided email exists.</p>
+            {% endif %}
+		</div>
+	</form>
+</div>
+{% endblock %}

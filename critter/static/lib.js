@@ -38,8 +38,12 @@ function like(postID) {
     })
 }
 
-function post(text) {
+function post() {
+    text = document.getElementById("text").value
     updateState(postAPI, 'POST', postObj(text))
+    .then( response => {
+        
+    })
 }
 
 function deletePost(postID) {
