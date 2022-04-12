@@ -32,10 +32,12 @@ login.login_view = 'login'
 @app.route('/', methods = ['POST', 'GET'])
 @login_required
 def timeline():
+
+
     if request.method == 'POST' and request.form['text'] is not None:
         db_queries.insertPost(current_user.get_id(), 'text', request.form['text'], None)
         
-    posts = db_queries.getPostsByUserID(1) # TODO: Make method to return n latest posts from self and all followed accounts.
+    posts = db_queries.getFollowedPosts(current_user.get_id()) # TODO: Make method to return n latest posts from self and all followed accounts.
     return render_template('timeline.html', posts=posts)
 
 @app.route('/profile/<string:username>', defaults={'username': None})
@@ -98,8 +100,13 @@ def sign_up():
             pass
         else:
             db_queries.insertUser(username, email, password, gender, None, None)
+            userID = db_queries.getUserLoginInfoByEmail(email).UserID
+            print("\n\n++++++++++" + str(userID) + "++++++++++\n\n")
+            for i in range(0,10):
+                print(i)
+                db_queries.insertFollow(userID, i)
             return redirect(url_for('login'))
-            
+
     return render_template('signup.html')
 
 @app.route('/about')

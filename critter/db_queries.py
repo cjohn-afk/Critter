@@ -47,6 +47,12 @@ def getLikesByPostID(id):
 def getSpecificLike(userID, postID):
 	return db.session.query(db_models.Likes).filter(db_models.Likes.UserID == userID, db_models.Likes.PostID == postID).first()
 
+def insertFollow(userID, followingID):
+	follow = db_models.Follows(UserID = userID, FollowingID = followingID)
+	print(follow.__dict__)
+	db.session.add(follow)
+	db.session.commit()
+
 # Inserts a like int the database.
 def insertLike(userID, postID):
 	if getSpecificLike(userID, postID) is None:
@@ -90,6 +96,10 @@ def deletePost(postID):
 	likes.delete()
 	db.session.commit()
 
+def getFollowedIDs(userID):
+	follows = db.session.query(db_models.Follows).filter(db_models.Follows.UserID == userID).all()
+	return follows
+
 def getUsernamesByID(ids=[]):
 	results = [
 		{
@@ -105,7 +115,7 @@ def getUsernamesByID(ids=[]):
 
 	for id in ids:
 		try:
-			info = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.UserID == id).first()
+			info = getUserProfileInfoByID(id)
 		except:
 			print("Error locating user.") # probably need to add more detailed error reporting here
 			continue
@@ -125,3 +135,17 @@ def getUsernamesByID(ids=[]):
 			results.append(user)
 
 	return results
+
+
+
+def getFollowedPosts(userID, n=50):
+	follows = getFollowedIDs(userID)
+	post_list = []
+	for follow in follows:
+		new_posts = getPostsByUserID(follow.FollowingID, 25)
+		if new_posts is not None:
+			post_list += getPostsByUserID(follow.FollowingID, 25)
+	
+	post_list.sort(reverse=True, key=(lambda e : e.PostTime))
+	print(post_list)
+	return post_list[0:n-1]
