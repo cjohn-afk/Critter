@@ -102,20 +102,35 @@ html{
 	transition: all 0.25s ease-in-out;
 }
 
+.menu a.logo {
+	background-color: transparent;
+	padding: 0em;
+	margin: 0em;
+	box-shadow: none;
+	border-radius: 100%;
+}
+
+.menu a.logo:hover {
+	background-color: transparent;
+}
+
+.menu a.logo img {
+	width: 10em;
+	min-width: 1em;
+	height: auto;
+	margin-bottom: 1em;
+}
+
 .menu a:hover {
   	background-color: var(--accent3);
 }
 
-.menu img {
-	width: 10em;
-	margin-bottom: 1em;
-}
-
 .profile {
-    background-color: inherit;
-	color: var(--background3);
+    background-color: var(--textcolor2);
+	color: var(--background);
     margin-bottom:15px;
     padding:15px;
+	border: #000000 1px solid;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -124,6 +139,8 @@ html{
 	font-size: 3em;
 	font-weight: bold;
 	font-style: italic;
+	color: var(--background3);
+	margin-left: 0.5em;
 }
 
 .profile .profileinfo {
@@ -379,6 +396,11 @@ html{
 	  max-width: fit-content;
 	  font-size: 0em;
 	}
+
+	.menu a.logo {
+		font-size: 5em;
+	}
+
   .col-6 {
 	  margin:0px;
 	  padding:0em 3em 0em 3em;

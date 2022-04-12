@@ -1,6 +1,6 @@
 <div class="col-3 ">
 <div class="menu" id="sideNav">
-        <img src="{{ url_for('static', filename='logo.png') }}" >
+        <a class="logo" href="{{ url_for('timeline') }}"><img src="{{ url_for('static', filename='logo.png') }}" ></a>
     {% if current_user.is_authenticated %}
         <!-- TODO: Change profile button into current user's profile photo -->
         <a href="{{ url_for('profile', userID=current_user.UserID) }}" class="active"><span class="material-icons">account_circle</span> Profile</a>

@@ -12,14 +12,9 @@
 					<img class="profilecircle" src="{{ profilePic }}">
                     <div class="profileinfo">
                         <p class="username">{{ profile.Username }}</p>
-						<p class="profiletext">Working primarily on the database as well as database side python functions, Austin has worked hard on the back end development for our website. Austin's extensive efforts to get a solid foundation for our project have allowed us to move forward with an otherwise very difficult project.</p>
+						<p class="profiletext">{% if profile.Bio is not none %}{{ profile.Bio }}{% endif %}</p>
                     </div>
                 </div>
-				
-			<div class="col-3 right">
-				<div class="profilePanel">
-					
-				</div>
-			</div>
+                
         </div>
 {% endblock %}
