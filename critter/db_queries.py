@@ -85,3 +85,39 @@ def deletePost(postID):
 	post.delete()
 	likes.delete()
 	db.session.commit()
+
+def getUsernamesByID(ids=[]):
+	results = [
+		{
+			# example:
+			# "id": 72,
+			# "username": "user1227",
+			# "uri": "uri goes here"
+		},
+		{
+			# etc
+		}
+	]
+
+	for id in ids:
+		try:
+			info = db.session.query(db_models.User_Profiles).filter(db_models.User_Profiles.UserID == id).first()
+		except:
+			print("Error locating user.") # probably need to add more detailed error reporting here
+			continue
+		# just in case someone has no profile pic, we set a default
+		try:
+			uri = info.Avatar
+		except:
+			uri = None
+		
+		# UserID and Username must exist, doesn't matter if URI doesn't exist
+		if info is not None:
+			user = {
+				"id": info.UserID,
+				"username": info.Username,
+				"uri": uri
+			}
+			results.append(user)
+
+	return results
