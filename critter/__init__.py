@@ -154,9 +154,14 @@ def post():
 @app.route('/API/follow', methods = ['POST'])
 def follow():
     if request.method == 'POST':
-        ## TODO: MAKE FOLLOWING WORK!
-        pass
-
-    return ""
+        if request.json.get('id') is not None:
+            followedIDs = db_queries.getFollowedIDs(current_user.get_id())
+            if int(request.json.get('id')) not in followedIDs:
+                db_queries.insertFollow(current_user.get_id(), request.json.get('id'))
+                return "FOLLOWED"
+            else:
+                db_queries.deleteFollow(current_user.get_id(), request.json.get('id'))
+                return "UNFOLLOWED"
+    about(400)
 
 app.run() #for testing

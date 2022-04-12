@@ -52,6 +52,15 @@ def insertFollow(userID, followingID):
 	db.session.add(follow)
 	db.session.commit()
 
+def deleteFollow(userID, followingID):
+	followQuery = db.session.query(db_models.Follows).filter(db_models.Follows.UserID == userID, db_models.Follows.FollowingID == followingID)
+	if followQuery is not None:
+		relationshipID = followQuery.first().RelationshipID
+		followQuery.delete()
+		db.session.commit()
+		return relationshipID
+	return None
+
 # Inserts a like int the database.
 def insertLike(userID, postID):
 	if getSpecificLike(userID, postID) is None:

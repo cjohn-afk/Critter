@@ -4,7 +4,7 @@
         <div class="row" id="page">
             {% include 'navbar.html' %}
             <div class="col-6" id="pageContents">
-                <div class="profile">
+                <div id="profile" class="profile">
                     {% if profile.Avatar is not none %}
                         {% set profilePic = url_for('static', filename=profile.Avatar) %}
                     {% else %}
