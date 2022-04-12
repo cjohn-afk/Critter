@@ -136,15 +136,13 @@ def getUsernamesByID(ids=[]):
 
 	return results
 
-
-
 def getFollowedPosts(userID, n=50):
 	follows = getFollowedIDs(userID)
 	post_list = []
 	for follow in follows:
-		new_posts = getPostsByUserID(follow.FollowingID, 25)
+		new_posts = getPostsByUserID(follow.FollowingID)
 		if new_posts is not None:
-			post_list += getPostsByUserID(follow.FollowingID, 25)
+			post_list += new_posts
 	
 	post_list.sort(reverse=True, key=(lambda e : e.PostTime))
 	print(post_list)
