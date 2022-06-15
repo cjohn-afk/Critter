@@ -1,44 +1,26 @@
 {% macro gen_post(userinfo, post) %}
-<div id="post_{{ post.PostID }}" class="post">
-    <div class="userinfo">
-        <a href="{{ url_for('profile', userID=post.UserID) }}">
-            {% if userinfo[post.UserID]["avatar"] is not none %}
-                {% set profilePic = url_for('static', filename=userinfo[post.UserID]["avatar"]) %}
-            {% else %}
-                {% set profilePic = url_for('static', filename='CritterDefault.png') %}
-            {% endif %}
-            <img class="profilecircle" src="{{ profilePic }}">
-            <p id="username">{{ userinfo[post.UserID]["username"] }}</p>
-        </a>
+    {% if userinfo[post.UserID]["avatar"] is not none %}
+        {% set profilePic = url_for('static', filename=userinfo[post.UserID]["avatar"]) %}
+    {% else %}
+        {% set profilePic = url_for('static', filename='assets/media/images/default.jpg') %}
+    {% endif %}
+<div id="post_{{ post.PostID }}" class="center-col-item talk-box">
+    <div class="talk-box-left">
+        <div class="profile-photo-container">
+            <img class="profile-photo" src="{{ profilePic }}">
+        </div>
     </div>
-    <div class="postcontent">
-        <p class="posttext">{{ post.Text }}</p>
-    </div>
-    <hr>
-    <div class="actions">
-        <div class="like-button action-button" onclick="like({{ post.PostID }})">
-            <!-- TODO: Make like button clickable. -->
-            <p class="num_likes">{% if post.likes is defined %} {{ post.likes|length }} {% else %} 0 {% endif %}</p>
-            <span class="material-icons like_icon">favorite{% if current_user.UserID not in post.likes|map(attribute="UserID") or post.likes is not defined %}_border{% endif %}</span>
+    <div class="talk-box-right">
+        <div class="username-container">
+            <p class="username">{{ userinfo[post.UserID]["username"] }}</p>
         </div>
-        <div class="comment-button action-button">
-            <!-- TODO: ALLOW A USER TO COMMENT VIA A POPUP BOX (CSS)-->
-            <p id="num_comments">{% if posts.comments is defined %} {{ post.comments|length }} {% else %} 0 {% endif %}</p>
-            <span class="material-icons">chat_bubble_outline</span>
+        <div class="post-content-container">
+            <p class="text-content">{{ post.Text }}</p>
         </div>
-        {% if current_user.UserID == post.UserID %}
-        <div class="delete-button action-button" onclick="deletePost({{ post.PostID }})">
-            <span class="material-icons">delete_outline</span>
-        </div>
-        {% endif %}
     </div>
 </div>
 {% endmacro %}
 
 {% macro display_posts(posts) %}
-
-    {% for u,p in posts %}
-        {% call gen_post(u, p) %}{% endcall %}
-    {% endfor %}
-
+{% for u,p in posts %}{% call gen_post(u, p) %}{% endcall %}{% endfor %}
 {% endmacro %}

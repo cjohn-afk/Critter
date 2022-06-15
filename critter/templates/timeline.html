@@ -1,20 +1,28 @@
 {% extends 'template.html' %}
 {% from "macros.html" import gen_post, display_posts with context %}
 {% block content%}
-<div class="row" id="page">
+
+<div class="left-col">
     {% include 'navbar.html' %}
-    <div class="col-6" id="pageContents">
-        <div class="squeakBox">
-            <form action="{{ url_for('timeline') }}" method="POST">
-                <textarea id="text" name="text" rows="3" cols="60" maxlength="240" placeholder="Whats new?" spellcheck="true"></textarea>
-                <div class="squeakRow">
-                    <button type="submit">Post</button>
-                </div>
-            </form>
+</div>
+
+<div class="center-col">
+
+    <form action="{{ url_for('timeline') }}" method="POST">
+        <div class="center-col-item post-box">
+            <textarea id="text" name="text" maxlength="240" spellcheck="true" placeholder="How are you feeling..."></textarea>
+            <button type="submit">Post</button>
         </div>
+    </form>
+        
+    <div class="talk-box-area">
         {% for p in posts %}
             {{ gen_post(userinfo, p) }}
         {% endfor %}
     </div>
+        
+</div>
+
+<div class="right-col">
 </div>
 {% endblock %}

@@ -1,14 +1,52 @@
-<div class="col-3 ">
-<div class="menu" id="sideNav">
-        <a class="logo" href="{{ url_for('timeline') }}"><img src="{{ url_for('static', filename='logo.png') }}" ></a>
-    {% if current_user.is_authenticated %}
-        <!-- TODO: Change profile button into current user's profile photo -->
-        <a href="{{ url_for('profile', userID=current_user.UserID) }}" class="active"><span class="material-icons">account_circle</span> Profile</a>
-        <a href="{{ url_for('messages') }}" class="active"><span class="material-icons">email</span> Inbox</a>
-        <a href="{{ url_for('settings') }}" class="active"><span class="material-icons">settings</span> Settings</a>
-        <a href="{{ url_for('logout') }}" class="active"><span class="material-icons">logout</span> Logout</a>
-    {% else %}
-        <a href="{{ url_for('login') }}" class="active"><span class="material-icons">login</span> Login</a>
-    {% endif %}
-</div>
+<div class="navbar">
+    <div class="navbar-item active-page">
+        <a href="{{ url_for('timeline') }}">
+            <i id="home-button" class='eos-icons-outlined'>pest_control_rodent</i>
+        </a>
+    </div>
+    
+{% if current_user.is_authenticated %}
+    
+    <div class="navbar-item active-page">
+        <a href="{{ url_for('timeline') }}">
+            <i id="home-button" class='eos-icons-outlined'>home</i>
+            <label for="home-button">Home</label>
+        </a>
+    </div>
+    <div class="navbar-item">
+        <a href="{{ url_for('messages') }}">
+            <i id="inbox-button" class='eos-icons-outlined'>email</i>
+            <label for="inbox-button">Inbox</label>
+        </a>
+    </div>
+    <div class="navbar-item">
+        <a href="{{ url_for('profile', userID=current_user.UserID) }}">
+            <i id="profile-button" class='eos-icons-outlined'>face</i>
+            <label for="profile-button">Profile</label>
+        </a>
+    </div>
+    <div class="navbar-item">
+        <a href="{{ url_for('settings') }}">
+            <i id="settings-button" class='eos-icons-outlined'>settings</i>
+            <label for="settings-button">Settings</label>
+        </a>
+    </div>
+    <div class="navbar-item">
+        <a href="{{ url_for('logout') }}">
+            <i id="logout-button" class='eos-icons-outlined'>logout</i>
+            <label for="logout-button">Logout</label>
+        </a>
+    </div>
+    
+{% else %}
+
+    <div class="navbar-item">
+        <a href="{{ url_for('login') }}">
+            <i id="login-button" class='eos-icons-outlined'>login</i>
+            <label for="login-button">Login</label>
+        </a>
+    </div>
+    
+{% endif %}
+
 </div>
