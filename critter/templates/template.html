@@ -3,8 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title> {{ page_title | default("Critter") }} </title>
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png')}}" >
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="style.css") }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="/css/main-style.css") }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/eos-icons-outlined.css") }}"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <script type="text/javascript" src="{{ url_for('static', filename="lib.js") }}"></script>
     </head>
     <body>
