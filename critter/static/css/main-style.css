@@ -150,15 +150,40 @@ a {
 }
 
 .talk-box-right {
+    display:flex;
+    flex-direction:column;
     width:80%;
     height:100%;
     padding-right:1em;
     overflow-x:hidden;
+    justify-content:space-between;
 }
 
 .talk-box-right .username {
     font-weight:bold;
     color:var(--orange);
+}
+
+.talk-box-right .engage-container {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+}
+
+.talk-box-right .engage-container .eos-icons-outlined {
+    /* Sizes can be 18, 24, 36, 48 */
+    font-size: 18px!important;
+    color:var(--orange);
+    margin:0.25em;
+    padding:0.25em;
+    user-select:none;
+}
+
+.talk-box-right .engage-container .eos-icons-outlined:hover {
+    background-color:var(--orange);
+    color:var(--black);
+    border-radius:1em;
+    cursor:pointer;
 }
 
 .last-talk-box {
