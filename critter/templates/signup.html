@@ -1,7 +1,11 @@
 {% extends 'template.html' %}
 {% block content%}
 <div class="login col-4">
-    <a href="{{ url_for('timeline') }}"><img src="{{ url_for('static', filename="logov1.png") }}"></a>
+    <div class="login-logo">
+        <a href="{{ url_for('timeline') }}">
+            <i id="home-button" class='eos-icons-outlined'>pest_control_rodent</i>
+        </a>
+    </div>
     <form action="{{ url_for('sign_up') }}" method="POST">
 		<div class="credentials">
 			<label for="username"><b>Username</b></label>
@@ -22,18 +26,12 @@
 
 			<label for="conf-password"><b>Password</b></label>
     		<input type="password" placeholder="Enter Password Again..." name="conf-password" required>
-
-            <span class="psw">Forgot <a href="#">password</a>?</span>
-    		<button type="submit">Login</button>
-
-			<input type="checkbox" name="remember" value="true">
-			<label for="remember">Remember me</label>
-			<input type="hidden" name="remember" value="false">
-
-            {% if login_failed %}
-            <p id="login_error">Either the password you entered was incorrect or no user with the provided email exists.</p>
-            {% endif %}
+    		
+    		<button type="submit">Sign Up</button>
 		</div>
 	</form>
+	
+	<p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>!</p>
+	
 </div>
 {% endblock %}
